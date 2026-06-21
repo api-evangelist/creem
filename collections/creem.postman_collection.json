@@ -1,0 +1,244 @@
+{
+  "info": {
+    "_postman_id": "c9f1e7a2-4b8d-4c2a-9e3f-1a2b3c4d5e6f",
+    "name": "Creem API",
+    "description": "REST API for Creem, a merchant-of-record payments platform for SaaS and AI startups. Authenticated with the x-api-key header. Base URL https://api.creem.io/v1 (test mode https://test-api.creem.io/v1).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "x-api-key", "type": "string" },
+      { "key": "value", "value": "{{apiKey}}", "type": "string" },
+      { "key": "in", "value": "header", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.creem.io/v1" }
+  ],
+  "item": [
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Create a product",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/products", "host": ["{{baseUrl}}"], "path": ["products"] },
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"<string>\",\n  \"price\": 1000,\n  \"currency\": \"USD\",\n  \"billing_type\": \"recurring\",\n  \"billing_period\": \"every-month\"\n}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "Retrieve a product",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/products?product_id=<string>", "host": ["{{baseUrl}}"], "path": ["products"], "query": [{ "key": "product_id", "value": "<string>" }] }
+          }
+        },
+        {
+          "name": "List all products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/products/search?page_number=1&page_size=10", "host": ["{{baseUrl}}"], "path": ["products", "search"], "query": [{ "key": "page_number", "value": "1" }, { "key": "page_size", "value": "10" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Checkouts",
+      "item": [
+        {
+          "name": "Create a checkout session",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/checkouts", "host": ["{{baseUrl}}"], "path": ["checkouts"] },
+            "body": { "mode": "raw", "raw": "{\n  \"product_id\": \"<string>\",\n  \"units\": 1,\n  \"discount_code\": \"<string>\",\n  \"customer\": { \"email\": \"<string>\" },\n  \"success_url\": \"<string>\",\n  \"metadata\": {}\n}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "Retrieve a checkout session",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/checkouts?checkout_id=<string>", "host": ["{{baseUrl}}"], "path": ["checkouts"], "query": [{ "key": "checkout_id", "value": "<string>" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customers",
+      "item": [
+        {
+          "name": "Retrieve a customer",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/customers?customer_id=<string>", "host": ["{{baseUrl}}"], "path": ["customers"], "query": [{ "key": "customer_id", "value": "<string>" }] }
+          }
+        },
+        {
+          "name": "Generate a customer billing portal link",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/customers/billing", "host": ["{{baseUrl}}"], "path": ["customers", "billing"] },
+            "body": { "mode": "raw", "raw": "{\n  \"customer_id\": \"<string>\"\n}", "options": { "raw": { "language": "json" } } }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Subscriptions",
+      "item": [
+        {
+          "name": "Retrieve a subscription",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/subscriptions?subscription_id=<string>", "host": ["{{baseUrl}}"], "path": ["subscriptions"], "query": [{ "key": "subscription_id", "value": "<string>" }] }
+          }
+        },
+        {
+          "name": "List all subscriptions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/subscriptions/search?page_number=1&page_size=10", "host": ["{{baseUrl}}"], "path": ["subscriptions", "search"], "query": [{ "key": "page_number", "value": "1" }, { "key": "page_size", "value": "10" }] }
+          }
+        },
+        {
+          "name": "Update a subscription",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/subscriptions/:id", "host": ["{{baseUrl}}"], "path": ["subscriptions", ":id"], "variable": [{ "key": "id", "value": "<string>" }] },
+            "body": { "mode": "raw", "raw": "{}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "Upgrade a subscription",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/subscriptions/:id/upgrade", "host": ["{{baseUrl}}"], "path": ["subscriptions", ":id", "upgrade"], "variable": [{ "key": "id", "value": "<string>" }] },
+            "body": { "mode": "raw", "raw": "{\n  \"product_id\": \"<string>\",\n  \"update_behavior\": \"proration-charge-immediately\"\n}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "Cancel a subscription",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/subscriptions/:id/cancel", "host": ["{{baseUrl}}"], "path": ["subscriptions", ":id", "cancel"], "variable": [{ "key": "id", "value": "<string>" }] },
+            "body": { "mode": "raw", "raw": "{}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "Pause a subscription",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/subscriptions/:id/pause", "host": ["{{baseUrl}}"], "path": ["subscriptions", ":id", "pause"], "variable": [{ "key": "id", "value": "<string>" }] },
+            "body": { "mode": "raw", "raw": "{}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "Resume a subscription",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/subscriptions/:id/resume", "host": ["{{baseUrl}}"], "path": ["subscriptions", ":id", "resume"], "variable": [{ "key": "id", "value": "<string>" }] },
+            "body": { "mode": "raw", "raw": "{}", "options": { "raw": { "language": "json" } } }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Transactions",
+      "item": [
+        {
+          "name": "Retrieve a transaction",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/transactions?transaction_id=<string>", "host": ["{{baseUrl}}"], "path": ["transactions"], "query": [{ "key": "transaction_id", "value": "<string>" }] }
+          }
+        },
+        {
+          "name": "List all transactions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/transactions/search?page_number=1&page_size=10", "host": ["{{baseUrl}}"], "path": ["transactions", "search"], "query": [{ "key": "page_number", "value": "1" }, { "key": "page_size", "value": "10" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Discounts",
+      "item": [
+        {
+          "name": "Create a discount",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/discounts", "host": ["{{baseUrl}}"], "path": ["discounts"] },
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"percentage\",\n  \"percentage\": 20,\n  \"duration\": \"once\"\n}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "Retrieve a discount",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/discounts?discount_id=<string>", "host": ["{{baseUrl}}"], "path": ["discounts"], "query": [{ "key": "discount_id", "value": "<string>" }] }
+          }
+        },
+        {
+          "name": "Delete a discount",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/discounts/:id/delete", "host": ["{{baseUrl}}"], "path": ["discounts", ":id", "delete"], "variable": [{ "key": "id", "value": "<string>" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Licenses",
+      "item": [
+        {
+          "name": "Validate a license key",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/licenses/validate", "host": ["{{baseUrl}}"], "path": ["licenses", "validate"] },
+            "body": { "mode": "raw", "raw": "{\n  \"key\": \"<string>\",\n  \"instance_id\": \"<string>\"\n}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "Activate a license key",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/licenses/activate", "host": ["{{baseUrl}}"], "path": ["licenses", "activate"] },
+            "body": { "mode": "raw", "raw": "{\n  \"key\": \"<string>\",\n  \"instance_name\": \"<string>\"\n}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "Deactivate a license key instance",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/licenses/deactivate", "host": ["{{baseUrl}}"], "path": ["licenses", "deactivate"] },
+            "body": { "mode": "raw", "raw": "{\n  \"key\": \"<string>\",\n  \"instance_id\": \"<string>\"\n}", "options": { "raw": { "language": "json" } } }
+          }
+        }
+      ]
+    }
+  ]
+}

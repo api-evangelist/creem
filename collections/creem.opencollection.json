@@ -1,0 +1,263 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Creem API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "apikey": {
+        "key": "x-api-key",
+        "value": "{{apiKey}}",
+        "in": "header"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Create a product", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.creem.io/v1/products",
+            "body": { "type": "json", "data": "{\n  \"name\": \"<string>\",\n  \"price\": 1000,\n  \"currency\": \"USD\",\n  \"billing_type\": \"recurring\",\n  \"billing_period\": \"every-month\"\n}" }
+          },
+          "docs": "Create a new product for one-time or recurring billing."
+        },
+        {
+          "info": { "name": "Retrieve a product", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.creem.io/v1/products?product_id=<string>"
+          },
+          "docs": "Retrieve a single product by its identifier."
+        },
+        {
+          "info": { "name": "List all products", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.creem.io/v1/products/search?page_number=1&page_size=10"
+          },
+          "docs": "Search and retrieve a paginated list of products."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Checkouts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Create a checkout session", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.creem.io/v1/checkouts",
+            "body": { "type": "json", "data": "{\n  \"product_id\": \"<string>\",\n  \"units\": 1,\n  \"discount_code\": \"<string>\",\n  \"customer\": { \"email\": \"<string>\" },\n  \"success_url\": \"<string>\",\n  \"metadata\": {}\n}" }
+          },
+          "docs": "Create a hosted checkout session and return a Creem-hosted checkout URL."
+        },
+        {
+          "info": { "name": "Retrieve a checkout session", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.creem.io/v1/checkouts?checkout_id=<string>"
+          },
+          "docs": "Retrieve a checkout session by its identifier."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Customers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Retrieve a customer", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.creem.io/v1/customers?customer_id=<string>"
+          },
+          "docs": "Retrieve a customer by id or email."
+        },
+        {
+          "info": { "name": "Generate a customer billing portal link", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.creem.io/v1/customers/billing",
+            "body": { "type": "json", "data": "{\n  \"customer_id\": \"<string>\"\n}" }
+          },
+          "docs": "Generate a self-service customer billing portal link."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Subscriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Retrieve a subscription", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.creem.io/v1/subscriptions?subscription_id=<string>"
+          },
+          "docs": "Retrieve a subscription by its identifier."
+        },
+        {
+          "info": { "name": "List all subscriptions", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.creem.io/v1/subscriptions/search?page_number=1&page_size=10"
+          },
+          "docs": "Search and retrieve a paginated list of subscriptions."
+        },
+        {
+          "info": { "name": "Update a subscription", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.creem.io/v1/subscriptions/{id}",
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Update an existing subscription."
+        },
+        {
+          "info": { "name": "Upgrade a subscription", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.creem.io/v1/subscriptions/{id}/upgrade",
+            "body": { "type": "json", "data": "{\n  \"product_id\": \"<string>\",\n  \"update_behavior\": \"proration-charge-immediately\"\n}" }
+          },
+          "docs": "Upgrade a subscription to a different product."
+        },
+        {
+          "info": { "name": "Cancel a subscription", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.creem.io/v1/subscriptions/{id}/cancel",
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Cancel a subscription immediately or schedule cancellation."
+        },
+        {
+          "info": { "name": "Pause a subscription", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.creem.io/v1/subscriptions/{id}/pause",
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Temporarily pause billing on a subscription."
+        },
+        {
+          "info": { "name": "Resume a subscription", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.creem.io/v1/subscriptions/{id}/resume",
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Resume a previously paused subscription."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Retrieve a transaction", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.creem.io/v1/transactions?transaction_id=<string>"
+          },
+          "docs": "Retrieve a single transaction by its identifier."
+        },
+        {
+          "info": { "name": "List all transactions", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.creem.io/v1/transactions/search?page_number=1&page_size=10"
+          },
+          "docs": "Search transactions filtered by customer, product, and date range."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Discounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Create a discount", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.creem.io/v1/discounts",
+            "body": { "type": "json", "data": "{\n  \"name\": \"<string>\",\n  \"type\": \"percentage\",\n  \"percentage\": 20,\n  \"duration\": \"once\"\n}" }
+          },
+          "docs": "Create a promotional discount code."
+        },
+        {
+          "info": { "name": "Retrieve a discount", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.creem.io/v1/discounts?discount_id=<string>"
+          },
+          "docs": "Retrieve a discount by id or code."
+        },
+        {
+          "info": { "name": "Delete a discount", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.creem.io/v1/discounts/{id}/delete"
+          },
+          "docs": "Permanently delete a discount code."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Licenses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Validate a license key", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.creem.io/v1/licenses/validate",
+            "body": { "type": "json", "data": "{\n  \"key\": \"<string>\",\n  \"instance_id\": \"<string>\"\n}" }
+          },
+          "docs": "Validate a license key or a specific license instance."
+        },
+        {
+          "info": { "name": "Activate a license key", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.creem.io/v1/licenses/activate",
+            "body": { "type": "json", "data": "{\n  \"key\": \"<string>\",\n  \"instance_name\": \"<string>\"\n}" }
+          },
+          "docs": "Activate a license key for a new instance/device."
+        },
+        {
+          "info": { "name": "Deactivate a license key instance", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.creem.io/v1/licenses/deactivate",
+            "body": { "type": "json", "data": "{\n  \"key\": \"<string>\",\n  \"instance_id\": \"<string>\"\n}" }
+          },
+          "docs": "Deactivate a license key instance/device."
+        }
+      ]
+    }
+  ]
+}

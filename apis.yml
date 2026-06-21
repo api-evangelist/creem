@@ -1,0 +1,187 @@
+aid: creem
+url: https://raw.githubusercontent.com/api-evangelist/creem/refs/heads/main/apis.yml
+name: Creem
+kind: company
+description: Creem is a merchant-of-record payments platform built for SaaS and AI
+  startups. Its REST API handles products, hosted checkouts, customers, subscriptions,
+  transactions, discounts, and software license keys, while Creem acts as the merchant
+  of record to manage global sales tax, VAT, fraud, and compliance on the seller's
+  behalf.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Payments
+- Merchant of Record
+- Subscriptions
+- SaaS
+- Billing
+created: '2026-06-21'
+modified: '2026-06-21'
+specificationVersion: '0.19'
+apis:
+- aid: creem:products
+  name: Creem Products API
+  tags:
+  - Products
+  - Catalog
+  - Billing
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.creem.io/api-reference/endpoint/create-product
+  baseURL: https://api.creem.io/v1
+  properties:
+  - url: https://docs.creem.io/api-reference/endpoint/create-product
+    type: Documentation
+  - url: https://docs.creem.io/api-reference/endpoint/search-products
+    type: APIReference
+  - url: openapi/creem-openapi.yml
+    type: OpenAPI
+  description: Create, retrieve, and search products for one-time or recurring billing,
+    including price, currency, billing type and period, tax mode, and license-key
+    configuration.
+- aid: creem:checkouts
+  name: Creem Checkouts API
+  tags:
+  - Checkout
+  - Payments
+  - Hosted
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.creem.io/api-reference/endpoint/create-checkout
+  baseURL: https://api.creem.io/v1
+  properties:
+  - url: https://docs.creem.io/features/checkout/checkout-api
+    type: Documentation
+  - url: https://docs.creem.io/api-reference/endpoint/create-checkout
+    type: APIReference
+  - url: openapi/creem-openapi.yml
+    type: OpenAPI
+  description: Create hosted checkout sessions that return a Creem-hosted checkout
+    URL, attach products, discounts, customers, custom fields, and metadata, and retrieve
+    a session's status and resulting order.
+- aid: creem:customers
+  name: Creem Customers API
+  tags:
+  - Customers
+  - Billing Portal
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.creem.io/api-reference/endpoint/get-customer
+  baseURL: https://api.creem.io/v1
+  properties:
+  - url: https://docs.creem.io/api-reference/endpoint/get-customer
+    type: Documentation
+  - url: https://docs.creem.io/api-reference/endpoint/get-billing-link
+    type: APIReference
+  - url: openapi/creem-openapi.yml
+    type: OpenAPI
+  description: Retrieve customers by id or email and generate self-service customer
+    billing portal links so customers can manage their own subscriptions, invoices,
+    and payment methods.
+- aid: creem:subscriptions
+  name: Creem Subscriptions API
+  tags:
+  - Subscriptions
+  - Recurring
+  - Lifecycle
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.creem.io/api-reference/endpoint/get-subscription
+  baseURL: https://api.creem.io/v1
+  properties:
+  - url: https://docs.creem.io/api-reference/endpoint/get-subscription
+    type: Documentation
+  - url: https://docs.creem.io/api-reference/endpoint/upgrade-subscription
+    type: APIReference
+  - url: openapi/creem-openapi.yml
+    type: OpenAPI
+  description: Retrieve and search subscriptions and manage their lifecycle - cancel,
+    update, upgrade to a different product, pause, and resume - across active, trialing,
+    paused, past_due, expired, and canceled states.
+- aid: creem:transactions
+  name: Creem Transactions API
+  tags:
+  - Transactions
+  - Payments
+  - Reporting
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.creem.io/api-reference/endpoint/get-transaction
+  baseURL: https://api.creem.io/v1
+  properties:
+  - url: https://docs.creem.io/api-reference/endpoint/get-transaction
+    type: Documentation
+  - url: https://docs.creem.io/api-reference/endpoint/search-transactions
+    type: APIReference
+  - url: openapi/creem-openapi.yml
+    type: OpenAPI
+  description: Retrieve a single transaction by id and search transactions filtered
+    by customer, product, and date range for payment reconciliation and reporting.
+- aid: creem:discounts
+  name: Creem Discounts API
+  tags:
+  - Discounts
+  - Coupons
+  - Promotions
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.creem.io/api-reference/endpoint/create-discount
+  baseURL: https://api.creem.io/v1
+  properties:
+  - url: https://docs.creem.io/api-reference/endpoint/create-discount
+    type: Documentation
+  - url: https://docs.creem.io/api-reference/endpoint/delete-discount
+    type: APIReference
+  - url: openapi/creem-openapi.yml
+    type: OpenAPI
+  description: Create, retrieve, search, and delete promotional discount codes (percentage
+    or fixed amount) that can be applied to checkout sessions and subscriptions.
+- aid: creem:licenses
+  name: Creem Licenses API
+  tags:
+  - Licenses
+  - License Keys
+  - Activation
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.creem.io/api-reference/endpoint/validate-license
+  baseURL: https://api.creem.io/v1
+  properties:
+  - url: https://docs.creem.io/features/license-keys
+    type: Documentation
+  - url: https://docs.creem.io/api-reference/endpoint/validate-license
+    type: APIReference
+  - url: openapi/creem-openapi.yml
+    type: OpenAPI
+  description: Validate, activate, and deactivate software license keys and their
+    per-device instances, with activation limits and expiry, for distributing and
+    enforcing licensed software.
+- aid: creem:webhooks
+  name: Creem Webhooks API
+  tags:
+  - Webhooks
+  - Events
+  - HMAC
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.creem.io/learn/webhooks/introduction
+  baseURL: https://api.creem.io/v1
+  properties:
+  - url: https://docs.creem.io/learn/webhooks/introduction
+    type: Documentation
+  - url: https://docs.creem.io/learn/webhooks/event-types
+    type: APIReference
+  - url: openapi/creem-openapi.yml
+    type: OpenAPI
+  description: HMAC-SHA256 signed event notifications for checkout, subscription,
+    refund, and dispute events, delivered to seller-configured endpoints for keeping
+    application state in sync with Creem.
+common:
+- type: GitHubOrganization
+  url: https://github.com/armitage-labs
+- type: LinkedIn
+  url: https://www.linkedin.com/company/creem-io
+- type: Website
+  url: https://www.creem.io/
+- type: Documentation
+  url: https://docs.creem.io
+- type: Plans
+  url: plans/creem-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/creem-rate-limits.yml
+- type: FinOps
+  url: finops/creem-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,46 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Creem
+providerId: creem
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- Payments
+- Merchant of Record
+- Subscriptions
+- SaaS
+- Billing
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  The Creem REST API returns HTTP 429 when a client exceeds its request
+  rate. Specific per-account or per-endpoint request-per-minute thresholds
+  are not published in the public documentation and are not reconciled in
+  this artifact. Clients should implement retry-with-backoff handling for
+  429 responses.
+notes: >-
+  Verify exact request-per-minute / per-second limits, any burst allowances,
+  and whether rate-limit headers (e.g. Retry-After) are returned, against
+  Creem support or updated documentation during reconciliation.
+sources:
+- https://docs.creem.io/api-reference/introduction
+- https://docs.creem.io
+responseCodes:
+  throttled: 429
+limits:
+- name: API Requests
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: A 429 status is returned when the rate limit is exceeded; published numeric thresholds were not located.
+policies:
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter on 429 responses and honor any Retry-After header.
+- name: Idempotency
+  description: Use the request_id field on checkout creation to safely retry without creating duplicate sessions.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

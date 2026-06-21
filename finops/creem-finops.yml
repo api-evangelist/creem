@@ -1,0 +1,99 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Creem
+providerId: creem
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: true
+tags:
+- Payments
+- Merchant of Record
+- Subscriptions
+- SaaS
+- Billing
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Creem spend. Creem is a merchant of record that charges a
+  flat percentage plus a fixed fee on each successful transaction
+  (3.9% + $0.40), with no setup or monthly fees. Cost scales directly with
+  processed payment volume and the count of successful transactions, so the
+  primary levers are average order value, transaction count, refund/dispute
+  rate, and currency mix. Payouts are made twice monthly.
+notes: >-
+  Per-transaction percentage and fixed fee are subject to change; verify
+  against the Creem pricing page and confirm any dispute, chargeback, or
+  currency-conversion fees during reconciliation.
+sources:
+- https://www.creem.io/pricing
+- https://docs.creem.io
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Creem
+serviceCategory: Payments and Billing
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Per Transaction
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Adjustment
+focusColumns:
+  ServiceName: Creem Payments
+  ServiceCategory: Payments and Billing
+  ProviderName: Creem
+  PublisherName: Creem
+  InvoiceIssuerName: Creem (Armitage Labs)
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Usage-Based
+meters:
+- name: transaction_percentage_fee
+  description: Percentage component (3.9%) charged on the value of each successful transaction.
+  unit: percent
+  aggregation: sum
+  dimensions:
+  - account
+  - product
+  - currency
+- name: transaction_fixed_fee
+  description: Fixed per-transaction component ($0.40) charged on each successful transaction.
+  unit: transactions
+  aggregation: count
+  dimensions:
+  - account
+  - product
+- name: processed_volume
+  description: Gross payment volume processed through Creem, the base for percentage fees.
+  unit: currency
+  aggregation: sum
+  dimensions:
+  - account
+  - product
+  - currency
+- name: refunds_disputes
+  description: Refunds, chargebacks, and disputes that reverse or adjust prior charges.
+  unit: transactions
+  aggregation: count
+  dimensions:
+  - account
+  - product
+principles:
+- name: Visibility
+  description: Pull Creem transaction history via the Transactions API; reconcile gross volume vs. fees and payouts.
+- name: Allocation
+  description: Tag transactions with product_id and metadata to map revenue and processing cost to teams and products.
+- name: Optimization
+  description: Reduce effective fee rate by increasing average order value, minimizing refunds/disputes via fraud protection, and consolidating low-value charges.
+- name: Accountability
+  description: Review the twice-monthly payout statements against expected net revenue and budget each billing cycle.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

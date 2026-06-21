@@ -1,0 +1,97 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Creem
+providerId: creem
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: true
+tags:
+- Payments
+- Merchant of Record
+- Subscriptions
+- SaaS
+- Billing
+- Plans
+description: >-
+  Creem uses a single transparent merchant-of-record pricing model: a flat
+  percentage plus a fixed fee per successful transaction, with no setup fees,
+  no monthly fees, and no tiered plans. As merchant of record, Creem includes
+  global tax compliance, fraud protection, all payment methods, automated
+  invoicing, revenue splits, multi-currency support, and subscription
+  management in the per-transaction rate. Payouts are made twice monthly to a
+  bank account or crypto/stablecoin wallet.
+notes: >-
+  Representative pricing as published on the Creem pricing page; verify the
+  current rate and any dispute/chargeback or currency-conversion fees on the
+  pricing page during reconciliation.
+sources:
+- https://www.creem.io/pricing
+- https://docs.creem.io
+plans:
+- id: creem-standard
+  name: Standard (Merchant of Record)
+  type: usage
+  description: >-
+    Single transparent per-transaction rate applied to every successful
+    payment, with no setup or monthly fees and all merchant-of-record
+    services included.
+  entries:
+  - label: Per Successful Transaction
+    name: transaction_fee
+    type: usage
+    metric: transactions
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 3.9% + $0.40 per successful transaction
+    userMultiplied: false
+  - label: Setup Fee
+    name: setup_fee
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0 (no setup fee)
+    userMultiplied: false
+  - label: Monthly Fee
+    name: monthly_fee
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0 (no monthly fee)
+    userMultiplied: false
+  - label: International Card Fee
+    name: international_card_fee
+    type: usage
+    metric: transactions
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0 (no international card fees)
+    userMultiplied: false
+  elements:
+  - name: Products
+  - name: Checkouts
+  - name: Customers
+  - name: Subscriptions
+  - name: Transactions
+  - name: Discounts
+  - name: Licenses
+  - name: Webhooks
+  - name: Global Tax Compliance
+  - name: Fraud Protection
+  - name: Multi-Currency Support
+  - name: Revenue Splits
+  - name: Automated Invoicing
+  - name: Stablecoin Payouts
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,85 @@
+aid: creem
+name: Creem
+review:
+  question: Does Creem expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-21'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    Creem's only documented asynchronous/event surface is outbound HMAC-SHA256
+    signed HTTP webhooks (checkout, subscription, refund, and dispute events)
+    delivered to seller-configured endpoints. Webhooks are server-to-server
+    HTTP callbacks, not a WebSocket or SSE stream the client subscribes to, so
+    no AsyncAPI document was authored for this provider at review time.
+findings:
+  summary: |
+    Creem does not publish a documented public WebSocket API. The Creem
+    platform exposes a synchronous REST API under https://api.creem.io/v1
+    (test mode https://test-api.creem.io/v1), authenticated with the
+    x-api-key header. Real-time state changes are delivered via outbound
+    HTTP webhooks signed with HMAC-SHA256, not via a WebSocket (ws:// or
+    wss://) or Server-Sent Events surface. No bidirectional or streaming
+    WebSocket endpoint is documented for products, checkouts, customers,
+    subscriptions, transactions, discounts, or licenses.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.creem.io/v1
+      documented: true
+    - protocol: Webhooks
+      scheme: https
+      note: Outbound HMAC-SHA256 signed HTTP POST callbacks to seller endpoints. Server-to-server, not a client-subscribed WebSocket or SSE stream.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in the Creem API reference or feature docs as of the review date.
+  endpointsConfirmedRest:
+    - POST   https://api.creem.io/v1/products
+    - GET    https://api.creem.io/v1/products
+    - GET    https://api.creem.io/v1/products/search
+    - POST   https://api.creem.io/v1/checkouts
+    - GET    https://api.creem.io/v1/checkouts
+    - GET    https://api.creem.io/v1/customers
+    - POST   https://api.creem.io/v1/customers/billing
+    - GET    https://api.creem.io/v1/subscriptions
+    - GET    https://api.creem.io/v1/subscriptions/search
+    - POST   https://api.creem.io/v1/subscriptions/{id}
+    - POST   https://api.creem.io/v1/subscriptions/{id}/upgrade
+    - POST   https://api.creem.io/v1/subscriptions/{id}/cancel
+    - POST   https://api.creem.io/v1/subscriptions/{id}/pause
+    - POST   https://api.creem.io/v1/subscriptions/{id}/resume
+    - GET    https://api.creem.io/v1/transactions
+    - GET    https://api.creem.io/v1/transactions/search
+    - POST   https://api.creem.io/v1/discounts
+    - GET    https://api.creem.io/v1/discounts
+    - DELETE https://api.creem.io/v1/discounts/{id}/delete
+    - POST   https://api.creem.io/v1/licenses/validate
+    - POST   https://api.creem.io/v1/licenses/activate
+    - POST   https://api.creem.io/v1/licenses/deactivate
+sources:
+  - url: https://docs.creem.io/api-reference/introduction
+    type: APIReference
+    note: Documents base URLs and x-api-key auth; all documented endpoints are HTTPS REST.
+  - url: https://docs.creem.io/api-reference/endpoint/create-checkout
+    type: APIReference
+    note: Confirms POST /v1/checkouts and the x-api-key header.
+  - url: https://docs.creem.io/api-reference/endpoint/validate-license
+    type: APIReference
+    note: Confirms POST /v1/licenses/validate.
+  - url: https://docs.creem.io/learn/webhooks/introduction
+    type: Documentation
+    note: Events are delivered as HMAC-SHA256 signed outbound HTTP webhooks, not WebSocket.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. Creem's asynchronous surface is
+    outbound HTTP webhooks, which are server-to-server callbacks rather than
+    a client-subscribable stream; no AsyncAPI document was created. The
+    apis.yml catalog models the eight REST product areas plus a Webhooks API
+    entry referencing the documented event surface.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
