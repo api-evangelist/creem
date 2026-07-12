@@ -168,6 +168,12 @@ apis:
     refund, and dispute events, delivered to seller-configured endpoints for keeping
     application state in sync with Creem.
 common:
+- type: VulnerabilityDisclosure
+  url: security/creem-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/creem-domain-security.yml
+- type: Authentication
+  url: authentication/creem-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/armitage-labs
 - type: LinkedIn

@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/creem-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: apiKey
+  type: apiKey
+  in: header
+  parameter: x-api-key
+  description: API key for authentication. Find your API key in the Creem dashboard under Developers
+    / Settings > API Keys.
+  sources:
+  - openapi/creem-openapi.yml
