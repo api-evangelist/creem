@@ -168,6 +168,8 @@ apis:
     refund, and dispute events, delivered to seller-configured endpoints for keeping
     application state in sync with Creem.
 common:
+- type: AgenticAccess
+  url: agentic-access/creem-agentic-access.yml
 - type: VulnerabilityDisclosure
   url: security/creem-vulnerability-disclosure.yml
 - type: DomainSecurity
