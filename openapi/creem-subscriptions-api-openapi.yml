@@ -1,0 +1,337 @@
+openapi: 3.0.1
+info:
+  title: Creem Checkouts Subscriptions API
+  description: REST API for Creem, a merchant-of-record payments platform for SaaS and AI startups. Manage products, hosted checkouts, customers, subscriptions, transactions, discounts, and software license keys while Creem handles global sales tax, VAT, fraud, and compliance as the merchant of record.
+  termsOfService: https://www.creem.io/terms
+  contact:
+    name: Creem Support
+    url: https://www.creem.io
+    email: support@creem.io
+  version: '1.0'
+servers:
+- url: https://api.creem.io/v1
+  description: Production
+- url: https://test-api.creem.io/v1
+  description: Test mode
+security:
+- apiKey: []
+tags:
+- name: Subscriptions
+paths:
+  /subscriptions:
+    get:
+      operationId: getSubscription
+      tags:
+      - Subscriptions
+      summary: Retrieve a subscription
+      description: Retrieve a subscription by its identifier.
+      parameters:
+      - name: subscription_id
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionEntity'
+  /subscriptions/search:
+    get:
+      operationId: searchSubscriptions
+      tags:
+      - Subscriptions
+      summary: List all subscriptions
+      description: Search and retrieve a paginated list of subscriptions.
+      parameters:
+      - name: page_number
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+      responses:
+        '200':
+          description: Paginated list of subscriptions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionListEntity'
+  /subscriptions/{id}:
+    post:
+      operationId: updateSubscription
+      tags:
+      - Subscriptions
+      summary: Update a subscription
+      description: Update an existing subscription.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSubscriptionRequest'
+      responses:
+        '200':
+          description: Updated subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionEntity'
+  /subscriptions/{id}/upgrade:
+    post:
+      operationId: upgradeSubscription
+      tags:
+      - Subscriptions
+      summary: Upgrade a subscription
+      description: Upgrade a subscription to a different product.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpgradeSubscriptionRequest'
+      responses:
+        '200':
+          description: Upgraded subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionEntity'
+  /subscriptions/{id}/cancel:
+    post:
+      operationId: cancelSubscription
+      tags:
+      - Subscriptions
+      summary: Cancel a subscription
+      description: Cancel a subscription immediately or schedule cancellation.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Canceled subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionEntity'
+  /subscriptions/{id}/pause:
+    post:
+      operationId: pauseSubscription
+      tags:
+      - Subscriptions
+      summary: Pause a subscription
+      description: Temporarily pause billing on a subscription.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Paused subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionEntity'
+  /subscriptions/{id}/resume:
+    post:
+      operationId: resumeSubscription
+      tags:
+      - Subscriptions
+      summary: Resume a subscription
+      description: Resume a previously paused subscription.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Resumed subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionEntity'
+components:
+  schemas:
+    CustomerEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+        object:
+          type: string
+          example: customer
+        email:
+          type: string
+        name:
+          type: string
+        country:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    SubscriptionListEntity:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionEntity'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    SubscriptionEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+        object:
+          type: string
+          example: subscription
+        status:
+          type: string
+          enum:
+          - active
+          - trialing
+          - paused
+          - past_due
+          - expired
+          - canceled
+        customer:
+          $ref: '#/components/schemas/CustomerEntity'
+        product:
+          $ref: '#/components/schemas/ProductEntity'
+        current_period_start_date:
+          type: string
+          format: date-time
+        current_period_end_date:
+          type: string
+          format: date-time
+        canceled_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    ProductEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+          enum:
+          - test
+          - live
+        object:
+          type: string
+          example: product
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: integer
+        currency:
+          type: string
+        billing_type:
+          type: string
+          enum:
+          - onetime
+          - recurring
+        billing_period:
+          type: string
+        status:
+          type: string
+        tax_mode:
+          type: string
+        tax_category:
+          type: string
+        image_url:
+          type: string
+        product_url:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    UpgradeSubscriptionRequest:
+      type: object
+      required:
+      - product_id
+      properties:
+        product_id:
+          type: string
+        update_behavior:
+          type: string
+          enum:
+          - proration-charge-immediately
+          - proration-charge
+          - proration-none
+    Pagination:
+      type: object
+      properties:
+        total_records:
+          type: integer
+        total_pages:
+          type: integer
+        current_page:
+          type: integer
+        next_page:
+          type: integer
+          nullable: true
+        prev_page:
+          type: integer
+          nullable: true
+    UpdateSubscriptionRequest:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+        update_behavior:
+          type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: API key for authentication. Find your API key in the Creem dashboard under Developers / Settings > API Keys.

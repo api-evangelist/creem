@@ -1,0 +1,171 @@
+openapi: 3.0.1
+info:
+  title: Creem Checkouts Licenses API
+  description: REST API for Creem, a merchant-of-record payments platform for SaaS and AI startups. Manage products, hosted checkouts, customers, subscriptions, transactions, discounts, and software license keys while Creem handles global sales tax, VAT, fraud, and compliance as the merchant of record.
+  termsOfService: https://www.creem.io/terms
+  contact:
+    name: Creem Support
+    url: https://www.creem.io
+    email: support@creem.io
+  version: '1.0'
+servers:
+- url: https://api.creem.io/v1
+  description: Production
+- url: https://test-api.creem.io/v1
+  description: Test mode
+security:
+- apiKey: []
+tags:
+- name: Licenses
+paths:
+  /licenses/validate:
+    post:
+      operationId: validateLicense
+      tags:
+      - Licenses
+      summary: Validate a license key
+      description: Validate a license key or a specific license instance.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidateLicenseRequest'
+      responses:
+        '200':
+          description: License
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicenseEntity'
+  /licenses/activate:
+    post:
+      operationId: activateLicense
+      tags:
+      - Licenses
+      summary: Activate a license key
+      description: Activate a license key for a new instance/device.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivateLicenseRequest'
+      responses:
+        '200':
+          description: License
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicenseEntity'
+  /licenses/deactivate:
+    post:
+      operationId: deactivateLicense
+      tags:
+      - Licenses
+      summary: Deactivate a license key instance
+      description: Deactivate a license key instance/device.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeactivateLicenseRequest'
+      responses:
+        '200':
+          description: License
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicenseEntity'
+components:
+  schemas:
+    LicenseInstanceEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+        object:
+          type: string
+          example: license-instance
+        name:
+          type: string
+        status:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+    LicenseEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+        object:
+          type: string
+          example: license
+        product_id:
+          type: string
+        status:
+          type: string
+          enum:
+          - active
+          - inactive
+          - expired
+          - disabled
+        key:
+          type: string
+        activation:
+          type: integer
+          description: Number of instances this license key has been activated on.
+        activation_limit:
+          type: integer
+          nullable: true
+          description: Activation limit. Null if activations are unlimited.
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        instance:
+          $ref: '#/components/schemas/LicenseInstanceEntity'
+    ActivateLicenseRequest:
+      type: object
+      required:
+      - key
+      - instance_name
+      properties:
+        key:
+          type: string
+        instance_name:
+          type: string
+    ValidateLicenseRequest:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          type: string
+        instance_id:
+          type: string
+    DeactivateLicenseRequest:
+      type: object
+      required:
+      - key
+      - instance_id
+      properties:
+        key:
+          type: string
+        instance_id:
+          type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: API key for authentication. Find your API key in the Creem dashboard under Developers / Settings > API Keys.

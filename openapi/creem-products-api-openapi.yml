@@ -1,0 +1,194 @@
+openapi: 3.0.1
+info:
+  title: Creem Checkouts Products API
+  description: REST API for Creem, a merchant-of-record payments platform for SaaS and AI startups. Manage products, hosted checkouts, customers, subscriptions, transactions, discounts, and software license keys while Creem handles global sales tax, VAT, fraud, and compliance as the merchant of record.
+  termsOfService: https://www.creem.io/terms
+  contact:
+    name: Creem Support
+    url: https://www.creem.io
+    email: support@creem.io
+  version: '1.0'
+servers:
+- url: https://api.creem.io/v1
+  description: Production
+- url: https://test-api.creem.io/v1
+  description: Test mode
+security:
+- apiKey: []
+tags:
+- name: Products
+paths:
+  /products:
+    post:
+      operationId: createProduct
+      tags:
+      - Products
+      summary: Create a product
+      description: Create a new product for one-time or recurring billing.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProductRequest'
+      responses:
+        '200':
+          description: Product created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductEntity'
+    get:
+      operationId: getProduct
+      tags:
+      - Products
+      summary: Retrieve a product
+      description: Retrieve a single product by its identifier.
+      parameters:
+      - name: product_id
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductEntity'
+  /products/search:
+    get:
+      operationId: searchProducts
+      tags:
+      - Products
+      summary: List all products
+      description: Search and retrieve a paginated list of products.
+      parameters:
+      - name: page_number
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+      responses:
+        '200':
+          description: Paginated list of products
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductListEntity'
+components:
+  schemas:
+    Pagination:
+      type: object
+      properties:
+        total_records:
+          type: integer
+        total_pages:
+          type: integer
+        current_page:
+          type: integer
+        next_page:
+          type: integer
+          nullable: true
+        prev_page:
+          type: integer
+          nullable: true
+    ProductListEntity:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductEntity'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    CreateProductRequest:
+      type: object
+      required:
+      - name
+      - price
+      - currency
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: integer
+          description: Price in the smallest currency unit (cents).
+        currency:
+          type: string
+          example: USD
+        billing_type:
+          type: string
+          enum:
+          - onetime
+          - recurring
+        billing_period:
+          type: string
+          description: Billing period for recurring products, e.g. every-month, every-year.
+        tax_mode:
+          type: string
+          enum:
+          - inclusive
+          - exclusive
+        tax_category:
+          type: string
+    ProductEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+          enum:
+          - test
+          - live
+        object:
+          type: string
+          example: product
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: integer
+        currency:
+          type: string
+        billing_type:
+          type: string
+          enum:
+          - onetime
+          - recurring
+        billing_period:
+          type: string
+        status:
+          type: string
+        tax_mode:
+          type: string
+        tax_category:
+          type: string
+        image_url:
+          type: string
+        product_url:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: API key for authentication. Find your API key in the Creem dashboard under Developers / Settings > API Keys.

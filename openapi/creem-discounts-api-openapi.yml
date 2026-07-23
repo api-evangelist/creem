@@ -1,0 +1,156 @@
+openapi: 3.0.1
+info:
+  title: Creem Checkouts Discounts API
+  description: REST API for Creem, a merchant-of-record payments platform for SaaS and AI startups. Manage products, hosted checkouts, customers, subscriptions, transactions, discounts, and software license keys while Creem handles global sales tax, VAT, fraud, and compliance as the merchant of record.
+  termsOfService: https://www.creem.io/terms
+  contact:
+    name: Creem Support
+    url: https://www.creem.io
+    email: support@creem.io
+  version: '1.0'
+servers:
+- url: https://api.creem.io/v1
+  description: Production
+- url: https://test-api.creem.io/v1
+  description: Test mode
+security:
+- apiKey: []
+tags:
+- name: Discounts
+paths:
+  /discounts:
+    post:
+      operationId: createDiscount
+      tags:
+      - Discounts
+      summary: Create a discount
+      description: Create a promotional discount code.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDiscountRequest'
+      responses:
+        '200':
+          description: Discount created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscountEntity'
+    get:
+      operationId: getDiscount
+      tags:
+      - Discounts
+      summary: Retrieve a discount
+      description: Retrieve a discount by id or code.
+      parameters:
+      - name: discount_id
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: code
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Discount
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscountEntity'
+  /discounts/{id}/delete:
+    delete:
+      operationId: deleteDiscount
+      tags:
+      - Discounts
+      summary: Delete a discount
+      description: Permanently delete a discount code.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Discount deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscountEntity'
+components:
+  schemas:
+    DiscountEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+        object:
+          type: string
+          example: discount
+        status:
+          type: string
+        name:
+          type: string
+        code:
+          type: string
+        type:
+          type: string
+          enum:
+          - percentage
+          - fixed
+        amount:
+          type: integer
+        percentage:
+          type: integer
+        duration:
+          type: string
+        expiry_date:
+          type: string
+          format: date-time
+    CreateDiscountRequest:
+      type: object
+      required:
+      - name
+      - type
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - percentage
+          - fixed
+        amount:
+          type: integer
+          description: Fixed amount in cents when type is fixed.
+        percentage:
+          type: integer
+          description: Percentage value when type is percentage.
+        currency:
+          type: string
+        duration:
+          type: string
+          enum:
+          - forever
+          - once
+          - repeating
+        code:
+          type: string
+        max_redemptions:
+          type: integer
+        expiry_date:
+          type: string
+          format: date-time
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: API key for authentication. Find your API key in the Creem dashboard under Developers / Settings > API Keys.

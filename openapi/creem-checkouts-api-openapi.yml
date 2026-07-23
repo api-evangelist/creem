@@ -1,0 +1,302 @@
+openapi: 3.0.1
+info:
+  title: Creem Checkouts API
+  description: REST API for Creem, a merchant-of-record payments platform for SaaS and AI startups. Manage products, hosted checkouts, customers, subscriptions, transactions, discounts, and software license keys while Creem handles global sales tax, VAT, fraud, and compliance as the merchant of record.
+  termsOfService: https://www.creem.io/terms
+  contact:
+    name: Creem Support
+    url: https://www.creem.io
+    email: support@creem.io
+  version: '1.0'
+servers:
+- url: https://api.creem.io/v1
+  description: Production
+- url: https://test-api.creem.io/v1
+  description: Test mode
+security:
+- apiKey: []
+tags:
+- name: Checkouts
+paths:
+  /checkouts:
+    post:
+      operationId: createCheckout
+      tags:
+      - Checkouts
+      summary: Create a checkout session
+      description: Create a hosted checkout session and return a Creem-hosted checkout URL the customer can be redirected to.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCheckoutRequest'
+      responses:
+        '200':
+          description: Checkout session created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutEntity'
+    get:
+      operationId: getCheckout
+      tags:
+      - Checkouts
+      summary: Retrieve a checkout session
+      description: Retrieve a checkout session by its identifier.
+      parameters:
+      - name: checkout_id
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Checkout session
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutEntity'
+components:
+  schemas:
+    LicenseInstanceEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+        object:
+          type: string
+          example: license-instance
+        name:
+          type: string
+        status:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+    CustomerEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+        object:
+          type: string
+          example: customer
+        email:
+          type: string
+        name:
+          type: string
+        country:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    LicenseEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+        object:
+          type: string
+          example: license
+        product_id:
+          type: string
+        status:
+          type: string
+          enum:
+          - active
+          - inactive
+          - expired
+          - disabled
+        key:
+          type: string
+        activation:
+          type: integer
+          description: Number of instances this license key has been activated on.
+        activation_limit:
+          type: integer
+          nullable: true
+          description: Activation limit. Null if activations are unlimited.
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        instance:
+          $ref: '#/components/schemas/LicenseInstanceEntity'
+    SubscriptionEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+        object:
+          type: string
+          example: subscription
+        status:
+          type: string
+          enum:
+          - active
+          - trialing
+          - paused
+          - past_due
+          - expired
+          - canceled
+        customer:
+          $ref: '#/components/schemas/CustomerEntity'
+        product:
+          $ref: '#/components/schemas/ProductEntity'
+        current_period_start_date:
+          type: string
+          format: date-time
+        current_period_end_date:
+          type: string
+          format: date-time
+        canceled_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    CheckoutEntity:
+      type: object
+      required:
+      - id
+      - mode
+      - object
+      - status
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+          enum:
+          - test
+          - live
+        object:
+          type: string
+          example: checkout
+        status:
+          type: string
+        request_id:
+          type: string
+        product:
+          $ref: '#/components/schemas/ProductEntity'
+        units:
+          type: integer
+        order:
+          type: object
+        subscription:
+          $ref: '#/components/schemas/SubscriptionEntity'
+        customer:
+          $ref: '#/components/schemas/CustomerEntity'
+        custom_fields:
+          type: array
+          items:
+            type: object
+        checkout_url:
+          type: string
+        success_url:
+          type: string
+        license_keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicenseEntity'
+        metadata:
+          type: object
+          additionalProperties: true
+    ProductEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+          enum:
+          - test
+          - live
+        object:
+          type: string
+          example: product
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: integer
+        currency:
+          type: string
+        billing_type:
+          type: string
+          enum:
+          - onetime
+          - recurring
+        billing_period:
+          type: string
+        status:
+          type: string
+        tax_mode:
+          type: string
+        tax_category:
+          type: string
+        image_url:
+          type: string
+        product_url:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    CreateCheckoutRequest:
+      type: object
+      required:
+      - product_id
+      properties:
+        request_id:
+          type: string
+        product_id:
+          type: string
+        units:
+          type: integer
+        discount_code:
+          type: string
+        customer:
+          type: object
+          properties:
+            id:
+              type: string
+            email:
+              type: string
+        custom_fields:
+          type: array
+          description: Up to 3 custom fields collected at checkout.
+          items:
+            type: object
+        success_url:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: true
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: API key for authentication. Find your API key in the Creem dashboard under Developers / Settings > API Keys.

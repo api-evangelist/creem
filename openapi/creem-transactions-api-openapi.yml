@@ -1,0 +1,138 @@
+openapi: 3.0.1
+info:
+  title: Creem Checkouts Transactions API
+  description: REST API for Creem, a merchant-of-record payments platform for SaaS and AI startups. Manage products, hosted checkouts, customers, subscriptions, transactions, discounts, and software license keys while Creem handles global sales tax, VAT, fraud, and compliance as the merchant of record.
+  termsOfService: https://www.creem.io/terms
+  contact:
+    name: Creem Support
+    url: https://www.creem.io
+    email: support@creem.io
+  version: '1.0'
+servers:
+- url: https://api.creem.io/v1
+  description: Production
+- url: https://test-api.creem.io/v1
+  description: Test mode
+security:
+- apiKey: []
+tags:
+- name: Transactions
+paths:
+  /transactions:
+    get:
+      operationId: getTransaction
+      tags:
+      - Transactions
+      summary: Retrieve a transaction
+      description: Retrieve a single transaction by its identifier.
+      parameters:
+      - name: transaction_id
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Transaction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionEntity'
+  /transactions/search:
+    get:
+      operationId: searchTransactions
+      tags:
+      - Transactions
+      summary: List all transactions
+      description: Search and retrieve a paginated list of transactions, filtered by customer, product, and date range.
+      parameters:
+      - name: customer_id
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: product_id
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: page_number
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+      responses:
+        '200':
+          description: Paginated list of transactions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionListEntity'
+components:
+  schemas:
+    Pagination:
+      type: object
+      properties:
+        total_records:
+          type: integer
+        total_pages:
+          type: integer
+        current_page:
+          type: integer
+        next_page:
+          type: integer
+          nullable: true
+        prev_page:
+          type: integer
+          nullable: true
+    TransactionListEntity:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionEntity'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    TransactionEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+        object:
+          type: string
+          example: transaction
+        amount:
+          type: integer
+        amount_paid:
+          type: integer
+        currency:
+          type: string
+        type:
+          type: string
+        status:
+          type: string
+        customer:
+          type: string
+        order:
+          type: string
+        subscription:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: API key for authentication. Find your API key in the Creem dashboard under Developers / Settings > API Keys.

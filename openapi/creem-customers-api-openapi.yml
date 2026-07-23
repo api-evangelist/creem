@@ -1,0 +1,107 @@
+openapi: 3.0.1
+info:
+  title: Creem Checkouts Customers API
+  description: REST API for Creem, a merchant-of-record payments platform for SaaS and AI startups. Manage products, hosted checkouts, customers, subscriptions, transactions, discounts, and software license keys while Creem handles global sales tax, VAT, fraud, and compliance as the merchant of record.
+  termsOfService: https://www.creem.io/terms
+  contact:
+    name: Creem Support
+    url: https://www.creem.io
+    email: support@creem.io
+  version: '1.0'
+servers:
+- url: https://api.creem.io/v1
+  description: Production
+- url: https://test-api.creem.io/v1
+  description: Test mode
+security:
+- apiKey: []
+tags:
+- name: Customers
+paths:
+  /customers:
+    get:
+      operationId: getCustomer
+      tags:
+      - Customers
+      summary: Retrieve a customer
+      description: Retrieve a customer by id or email.
+      parameters:
+      - name: customer_id
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: email
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Customer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerEntity'
+  /customers/billing:
+    post:
+      operationId: createBillingPortalLink
+      tags:
+      - Customers
+      summary: Generate a customer billing portal link
+      description: Generate a self-service customer billing portal link where the customer can manage subscriptions, invoices, and payment methods.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBillingPortalRequest'
+      responses:
+        '200':
+          description: Customer portal link
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingPortalEntity'
+components:
+  schemas:
+    BillingPortalEntity:
+      type: object
+      properties:
+        customer_portal_link:
+          type: string
+    CustomerEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+        object:
+          type: string
+          example: customer
+        email:
+          type: string
+        name:
+          type: string
+        country:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    CreateBillingPortalRequest:
+      type: object
+      required:
+      - customer_id
+      properties:
+        customer_id:
+          type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: API key for authentication. Find your API key in the Creem dashboard under Developers / Settings > API Keys.
