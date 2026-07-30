@@ -7,7 +7,20 @@ description: Creem is a merchant-of-record payments platform built for SaaS and 
   transactions, discounts, and software license keys, while Creem acts as the merchant
   of record to manage global sales tax, VAT, fraud, and compliance on the seller's
   behalf.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/creem.png
 tags:
 - Payments
 - Merchant of Record
@@ -18,155 +31,300 @@ created: '2026-06-21'
 modified: '2026-06-21'
 specificationVersion: '0.19'
 apis:
-- aid: creem:products
-  name: Creem Products API
-  tags:
-  - Products
-  - Catalog
-  - Billing
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: creem:creem-checkouts-api
+  name: Creem Checkouts API
+  description: The Checkouts API from Creem — 1 operation(s) for checkouts.
   humanURL: https://docs.creem.io/api-reference/endpoint/create-product
   baseURL: https://api.creem.io/v1
-  properties:
-  - url: https://docs.creem.io/api-reference/endpoint/create-product
-    type: Documentation
-  - url: https://docs.creem.io/api-reference/endpoint/search-products
-    type: APIReference
-  - url: openapi/creem-openapi.yml
-    type: OpenAPI
-  description: Create, retrieve, and search products for one-time or recurring billing,
-    including price, currency, billing type and period, tax mode, and license-key
-    configuration.
-- aid: creem:checkouts
-  name: Creem Checkouts API
   tags:
-  - Checkout
-  - Payments
-  - Hosted
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.creem.io/api-reference/endpoint/create-checkout
-  baseURL: https://api.creem.io/v1
+  - Checkouts
   properties:
-  - url: https://docs.creem.io/features/checkout/checkout-api
-    type: Documentation
-  - url: https://docs.creem.io/api-reference/endpoint/create-checkout
-    type: APIReference
-  - url: openapi/creem-openapi.yml
-    type: OpenAPI
-  description: Create hosted checkout sessions that return a Creem-hosted checkout
-    URL, attach products, discounts, customers, custom fields, and metadata, and retrieve
-    a session's status and resulting order.
-- aid: creem:customers
+  - type: OpenAPI
+    url: openapi/creem-checkouts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/create-product
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/search-products
+  - type: Documentation
+    url: https://docs.creem.io/features/checkout/checkout-api
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/create-checkout
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/get-customer
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/get-billing-link
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/get-subscription
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/upgrade-subscription
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/get-transaction
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/search-transactions
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/create-discount
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/delete-discount
+  - type: Documentation
+    url: https://docs.creem.io/features/license-keys
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/validate-license
+  - type: Documentation
+    url: https://docs.creem.io/learn/webhooks/introduction
+  - type: APIReference
+    url: https://docs.creem.io/learn/webhooks/event-types
+- aid: creem:creem-customers-api
   name: Creem Customers API
+  description: The Customers API from Creem — 2 operation(s) for customers.
+  humanURL: https://docs.creem.io/api-reference/endpoint/create-product
+  baseURL: https://api.creem.io/v1
   tags:
   - Customers
-  - Billing Portal
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.creem.io/api-reference/endpoint/get-customer
-  baseURL: https://api.creem.io/v1
   properties:
-  - url: https://docs.creem.io/api-reference/endpoint/get-customer
-    type: Documentation
-  - url: https://docs.creem.io/api-reference/endpoint/get-billing-link
-    type: APIReference
-  - url: openapi/creem-openapi.yml
-    type: OpenAPI
-  description: Retrieve customers by id or email and generate self-service customer
-    billing portal links so customers can manage their own subscriptions, invoices,
-    and payment methods.
-- aid: creem:subscriptions
-  name: Creem Subscriptions API
-  tags:
-  - Subscriptions
-  - Recurring
-  - Lifecycle
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.creem.io/api-reference/endpoint/get-subscription
-  baseURL: https://api.creem.io/v1
-  properties:
-  - url: https://docs.creem.io/api-reference/endpoint/get-subscription
-    type: Documentation
-  - url: https://docs.creem.io/api-reference/endpoint/upgrade-subscription
-    type: APIReference
-  - url: openapi/creem-openapi.yml
-    type: OpenAPI
-  description: Retrieve and search subscriptions and manage their lifecycle - cancel,
-    update, upgrade to a different product, pause, and resume - across active, trialing,
-    paused, past_due, expired, and canceled states.
-- aid: creem:transactions
-  name: Creem Transactions API
-  tags:
-  - Transactions
-  - Payments
-  - Reporting
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.creem.io/api-reference/endpoint/get-transaction
-  baseURL: https://api.creem.io/v1
-  properties:
-  - url: https://docs.creem.io/api-reference/endpoint/get-transaction
-    type: Documentation
-  - url: https://docs.creem.io/api-reference/endpoint/search-transactions
-    type: APIReference
-  - url: openapi/creem-openapi.yml
-    type: OpenAPI
-  description: Retrieve a single transaction by id and search transactions filtered
-    by customer, product, and date range for payment reconciliation and reporting.
-- aid: creem:discounts
+  - type: OpenAPI
+    url: openapi/creem-customers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/create-product
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/search-products
+  - type: Documentation
+    url: https://docs.creem.io/features/checkout/checkout-api
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/create-checkout
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/get-customer
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/get-billing-link
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/get-subscription
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/upgrade-subscription
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/get-transaction
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/search-transactions
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/create-discount
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/delete-discount
+  - type: Documentation
+    url: https://docs.creem.io/features/license-keys
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/validate-license
+  - type: Documentation
+    url: https://docs.creem.io/learn/webhooks/introduction
+  - type: APIReference
+    url: https://docs.creem.io/learn/webhooks/event-types
+- aid: creem:creem-discounts-api
   name: Creem Discounts API
+  description: The Discounts API from Creem — 2 operation(s) for discounts.
+  humanURL: https://docs.creem.io/api-reference/endpoint/create-product
+  baseURL: https://api.creem.io/v1
   tags:
   - Discounts
-  - Coupons
-  - Promotions
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.creem.io/api-reference/endpoint/create-discount
-  baseURL: https://api.creem.io/v1
   properties:
-  - url: https://docs.creem.io/api-reference/endpoint/create-discount
-    type: Documentation
-  - url: https://docs.creem.io/api-reference/endpoint/delete-discount
-    type: APIReference
-  - url: openapi/creem-openapi.yml
-    type: OpenAPI
-  description: Create, retrieve, search, and delete promotional discount codes (percentage
-    or fixed amount) that can be applied to checkout sessions and subscriptions.
-- aid: creem:licenses
+  - type: OpenAPI
+    url: openapi/creem-discounts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/create-product
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/search-products
+  - type: Documentation
+    url: https://docs.creem.io/features/checkout/checkout-api
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/create-checkout
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/get-customer
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/get-billing-link
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/get-subscription
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/upgrade-subscription
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/get-transaction
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/search-transactions
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/create-discount
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/delete-discount
+  - type: Documentation
+    url: https://docs.creem.io/features/license-keys
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/validate-license
+  - type: Documentation
+    url: https://docs.creem.io/learn/webhooks/introduction
+  - type: APIReference
+    url: https://docs.creem.io/learn/webhooks/event-types
+- aid: creem:creem-licenses-api
   name: Creem Licenses API
+  description: The Licenses API from Creem — 3 operation(s) for licenses.
+  humanURL: https://docs.creem.io/api-reference/endpoint/create-product
+  baseURL: https://api.creem.io/v1
   tags:
   - Licenses
-  - License Keys
-  - Activation
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.creem.io/api-reference/endpoint/validate-license
-  baseURL: https://api.creem.io/v1
   properties:
-  - url: https://docs.creem.io/features/license-keys
-    type: Documentation
-  - url: https://docs.creem.io/api-reference/endpoint/validate-license
-    type: APIReference
-  - url: openapi/creem-openapi.yml
-    type: OpenAPI
-  description: Validate, activate, and deactivate software license keys and their
-    per-device instances, with activation limits and expiry, for distributing and
-    enforcing licensed software.
-- aid: creem:webhooks
-  name: Creem Webhooks API
+  - type: OpenAPI
+    url: openapi/creem-licenses-api-openapi.yml
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/create-product
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/search-products
+  - type: Documentation
+    url: https://docs.creem.io/features/checkout/checkout-api
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/create-checkout
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/get-customer
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/get-billing-link
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/get-subscription
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/upgrade-subscription
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/get-transaction
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/search-transactions
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/create-discount
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/delete-discount
+  - type: Documentation
+    url: https://docs.creem.io/features/license-keys
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/validate-license
+  - type: Documentation
+    url: https://docs.creem.io/learn/webhooks/introduction
+  - type: APIReference
+    url: https://docs.creem.io/learn/webhooks/event-types
+- aid: creem:creem-products-api
+  name: Creem Products API
+  description: The Products API from Creem — 2 operation(s) for products.
+  humanURL: https://docs.creem.io/api-reference/endpoint/create-product
+  baseURL: https://api.creem.io/v1
   tags:
-  - Webhooks
-  - Events
-  - HMAC
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.creem.io/learn/webhooks/introduction
-  baseURL: https://api.creem.io/v1
+  - Products
   properties:
-  - url: https://docs.creem.io/learn/webhooks/introduction
-    type: Documentation
-  - url: https://docs.creem.io/learn/webhooks/event-types
-    type: APIReference
-  - url: openapi/creem-openapi.yml
-    type: OpenAPI
-  description: HMAC-SHA256 signed event notifications for checkout, subscription,
-    refund, and dispute events, delivered to seller-configured endpoints for keeping
-    application state in sync with Creem.
+  - type: OpenAPI
+    url: openapi/creem-products-api-openapi.yml
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/create-product
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/search-products
+  - type: Documentation
+    url: https://docs.creem.io/features/checkout/checkout-api
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/create-checkout
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/get-customer
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/get-billing-link
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/get-subscription
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/upgrade-subscription
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/get-transaction
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/search-transactions
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/create-discount
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/delete-discount
+  - type: Documentation
+    url: https://docs.creem.io/features/license-keys
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/validate-license
+  - type: Documentation
+    url: https://docs.creem.io/learn/webhooks/introduction
+  - type: APIReference
+    url: https://docs.creem.io/learn/webhooks/event-types
+- aid: creem:creem-subscriptions-api
+  name: Creem Subscriptions API
+  description: The Subscriptions API from Creem — 7 operation(s) for subscriptions.
+  humanURL: https://docs.creem.io/api-reference/endpoint/create-product
+  baseURL: https://api.creem.io/v1
+  tags:
+  - Subscriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/creem-subscriptions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/create-product
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/search-products
+  - type: Documentation
+    url: https://docs.creem.io/features/checkout/checkout-api
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/create-checkout
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/get-customer
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/get-billing-link
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/get-subscription
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/upgrade-subscription
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/get-transaction
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/search-transactions
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/create-discount
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/delete-discount
+  - type: Documentation
+    url: https://docs.creem.io/features/license-keys
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/validate-license
+  - type: Documentation
+    url: https://docs.creem.io/learn/webhooks/introduction
+  - type: APIReference
+    url: https://docs.creem.io/learn/webhooks/event-types
+- aid: creem:creem-transactions-api
+  name: Creem Transactions API
+  description: The Transactions API from Creem — 2 operation(s) for transactions.
+  humanURL: https://docs.creem.io/api-reference/endpoint/create-product
+  baseURL: https://api.creem.io/v1
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/creem-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/create-product
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/search-products
+  - type: Documentation
+    url: https://docs.creem.io/features/checkout/checkout-api
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/create-checkout
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/get-customer
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/get-billing-link
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/get-subscription
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/upgrade-subscription
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/get-transaction
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/search-transactions
+  - type: Documentation
+    url: https://docs.creem.io/api-reference/endpoint/create-discount
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/delete-discount
+  - type: Documentation
+    url: https://docs.creem.io/features/license-keys
+  - type: APIReference
+    url: https://docs.creem.io/api-reference/endpoint/validate-license
+  - type: Documentation
+    url: https://docs.creem.io/learn/webhooks/introduction
+  - type: APIReference
+    url: https://docs.creem.io/learn/webhooks/event-types
 common:
 - type: AgenticAccess
   url: agentic-access/creem-agentic-access.yml
