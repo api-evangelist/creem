@@ -1,0 +1,1017 @@
+openapi: 3.0.1
+info:
+  title: Creem API
+  description: >-
+    REST API for Creem, a merchant-of-record payments platform for SaaS and AI
+    startups. Manage products, hosted checkouts, customers, subscriptions,
+    transactions, discounts, and software license keys while Creem handles
+    global sales tax, VAT, fraud, and compliance as the merchant of record.
+  termsOfService: https://www.creem.io/terms
+  contact:
+    name: Creem Support
+    url: https://www.creem.io
+    email: support@creem.io
+  version: '1.0'
+servers:
+  - url: https://api.creem.io/v1
+    description: Production
+  - url: https://test-api.creem.io/v1
+    description: Test mode
+security:
+  - apiKey: []
+tags:
+  - name: Products
+  - name: Checkouts
+  - name: Customers
+  - name: Subscriptions
+  - name: Transactions
+  - name: Discounts
+  - name: Licenses
+paths:
+  /products:
+    post:
+      operationId: createProduct
+      tags:
+        - Products
+      summary: Create a product
+      description: Create a new product for one-time or recurring billing.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProductRequest'
+      responses:
+        '200':
+          description: Product created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductEntity'
+    get:
+      operationId: getProduct
+      tags:
+        - Products
+      summary: Retrieve a product
+      description: Retrieve a single product by its identifier.
+      parameters:
+        - name: product_id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductEntity'
+  /products/search:
+    get:
+      operationId: searchProducts
+      tags:
+        - Products
+      summary: List all products
+      description: Search and retrieve a paginated list of products.
+      parameters:
+        - name: page_number
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - name: page_size
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: Paginated list of products
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductListEntity'
+  /checkouts:
+    post:
+      operationId: createCheckout
+      tags:
+        - Checkouts
+      summary: Create a checkout session
+      description: >-
+        Create a hosted checkout session and return a Creem-hosted checkout URL
+        the customer can be redirected to.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCheckoutRequest'
+      responses:
+        '200':
+          description: Checkout session created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutEntity'
+    get:
+      operationId: getCheckout
+      tags:
+        - Checkouts
+      summary: Retrieve a checkout session
+      description: Retrieve a checkout session by its identifier.
+      parameters:
+        - name: checkout_id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Checkout session
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutEntity'
+  /customers:
+    get:
+      operationId: getCustomer
+      tags:
+        - Customers
+      summary: Retrieve a customer
+      description: Retrieve a customer by id or email.
+      parameters:
+        - name: customer_id
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: email
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Customer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerEntity'
+  /customers/billing:
+    post:
+      operationId: createBillingPortalLink
+      tags:
+        - Customers
+      summary: Generate a customer billing portal link
+      description: >-
+        Generate a self-service customer billing portal link where the customer
+        can manage subscriptions, invoices, and payment methods.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBillingPortalRequest'
+      responses:
+        '200':
+          description: Customer portal link
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingPortalEntity'
+  /subscriptions:
+    get:
+      operationId: getSubscription
+      tags:
+        - Subscriptions
+      summary: Retrieve a subscription
+      description: Retrieve a subscription by its identifier.
+      parameters:
+        - name: subscription_id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionEntity'
+  /subscriptions/search:
+    get:
+      operationId: searchSubscriptions
+      tags:
+        - Subscriptions
+      summary: List all subscriptions
+      description: Search and retrieve a paginated list of subscriptions.
+      parameters:
+        - name: page_number
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - name: page_size
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: Paginated list of subscriptions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionListEntity'
+  /subscriptions/{id}:
+    post:
+      operationId: updateSubscription
+      tags:
+        - Subscriptions
+      summary: Update a subscription
+      description: Update an existing subscription.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSubscriptionRequest'
+      responses:
+        '200':
+          description: Updated subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionEntity'
+  /subscriptions/{id}/upgrade:
+    post:
+      operationId: upgradeSubscription
+      tags:
+        - Subscriptions
+      summary: Upgrade a subscription
+      description: Upgrade a subscription to a different product.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpgradeSubscriptionRequest'
+      responses:
+        '200':
+          description: Upgraded subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionEntity'
+  /subscriptions/{id}/cancel:
+    post:
+      operationId: cancelSubscription
+      tags:
+        - Subscriptions
+      summary: Cancel a subscription
+      description: Cancel a subscription immediately or schedule cancellation.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Canceled subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionEntity'
+  /subscriptions/{id}/pause:
+    post:
+      operationId: pauseSubscription
+      tags:
+        - Subscriptions
+      summary: Pause a subscription
+      description: Temporarily pause billing on a subscription.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Paused subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionEntity'
+  /subscriptions/{id}/resume:
+    post:
+      operationId: resumeSubscription
+      tags:
+        - Subscriptions
+      summary: Resume a subscription
+      description: Resume a previously paused subscription.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Resumed subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionEntity'
+  /transactions:
+    get:
+      operationId: getTransaction
+      tags:
+        - Transactions
+      summary: Retrieve a transaction
+      description: Retrieve a single transaction by its identifier.
+      parameters:
+        - name: transaction_id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Transaction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionEntity'
+  /transactions/search:
+    get:
+      operationId: searchTransactions
+      tags:
+        - Transactions
+      summary: List all transactions
+      description: >-
+        Search and retrieve a paginated list of transactions, filtered by
+        customer, product, and date range.
+      parameters:
+        - name: customer_id
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: product_id
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: page_number
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - name: page_size
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: Paginated list of transactions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionListEntity'
+  /discounts:
+    post:
+      operationId: createDiscount
+      tags:
+        - Discounts
+      summary: Create a discount
+      description: Create a promotional discount code.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDiscountRequest'
+      responses:
+        '200':
+          description: Discount created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscountEntity'
+    get:
+      operationId: getDiscount
+      tags:
+        - Discounts
+      summary: Retrieve a discount
+      description: Retrieve a discount by id or code.
+      parameters:
+        - name: discount_id
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: code
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Discount
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscountEntity'
+  /discounts/{id}/delete:
+    delete:
+      operationId: deleteDiscount
+      tags:
+        - Discounts
+      summary: Delete a discount
+      description: Permanently delete a discount code.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Discount deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscountEntity'
+  /licenses/validate:
+    post:
+      operationId: validateLicense
+      tags:
+        - Licenses
+      summary: Validate a license key
+      description: Validate a license key or a specific license instance.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidateLicenseRequest'
+      responses:
+        '200':
+          description: License
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicenseEntity'
+  /licenses/activate:
+    post:
+      operationId: activateLicense
+      tags:
+        - Licenses
+      summary: Activate a license key
+      description: Activate a license key for a new instance/device.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivateLicenseRequest'
+      responses:
+        '200':
+          description: License
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicenseEntity'
+  /licenses/deactivate:
+    post:
+      operationId: deactivateLicense
+      tags:
+        - Licenses
+      summary: Deactivate a license key instance
+      description: Deactivate a license key instance/device.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeactivateLicenseRequest'
+      responses:
+        '200':
+          description: License
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicenseEntity'
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: >-
+        API key for authentication. Find your API key in the Creem dashboard
+        under Developers / Settings > API Keys.
+  schemas:
+    CreateProductRequest:
+      type: object
+      required:
+        - name
+        - price
+        - currency
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: integer
+          description: Price in the smallest currency unit (cents).
+        currency:
+          type: string
+          example: USD
+        billing_type:
+          type: string
+          enum:
+            - onetime
+            - recurring
+        billing_period:
+          type: string
+          description: Billing period for recurring products, e.g. every-month, every-year.
+        tax_mode:
+          type: string
+          enum:
+            - inclusive
+            - exclusive
+        tax_category:
+          type: string
+    ProductEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+          enum:
+            - test
+            - live
+        object:
+          type: string
+          example: product
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: integer
+        currency:
+          type: string
+        billing_type:
+          type: string
+          enum:
+            - onetime
+            - recurring
+        billing_period:
+          type: string
+        status:
+          type: string
+        tax_mode:
+          type: string
+        tax_category:
+          type: string
+        image_url:
+          type: string
+        product_url:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    ProductListEntity:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductEntity'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    CreateCheckoutRequest:
+      type: object
+      required:
+        - product_id
+      properties:
+        request_id:
+          type: string
+        product_id:
+          type: string
+        units:
+          type: integer
+        discount_code:
+          type: string
+        customer:
+          type: object
+          properties:
+            id:
+              type: string
+            email:
+              type: string
+        custom_fields:
+          type: array
+          description: Up to 3 custom fields collected at checkout.
+          items:
+            type: object
+        success_url:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: true
+    CheckoutEntity:
+      type: object
+      required:
+        - id
+        - mode
+        - object
+        - status
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+          enum:
+            - test
+            - live
+        object:
+          type: string
+          example: checkout
+        status:
+          type: string
+        request_id:
+          type: string
+        product:
+          $ref: '#/components/schemas/ProductEntity'
+        units:
+          type: integer
+        order:
+          type: object
+        subscription:
+          $ref: '#/components/schemas/SubscriptionEntity'
+        customer:
+          $ref: '#/components/schemas/CustomerEntity'
+        custom_fields:
+          type: array
+          items:
+            type: object
+        checkout_url:
+          type: string
+        success_url:
+          type: string
+        license_keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicenseEntity'
+        metadata:
+          type: object
+          additionalProperties: true
+    CustomerEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+        object:
+          type: string
+          example: customer
+        email:
+          type: string
+        name:
+          type: string
+        country:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    CreateBillingPortalRequest:
+      type: object
+      required:
+        - customer_id
+      properties:
+        customer_id:
+          type: string
+    BillingPortalEntity:
+      type: object
+      properties:
+        customer_portal_link:
+          type: string
+    SubscriptionEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+        object:
+          type: string
+          example: subscription
+        status:
+          type: string
+          enum:
+            - active
+            - trialing
+            - paused
+            - past_due
+            - expired
+            - canceled
+        customer:
+          $ref: '#/components/schemas/CustomerEntity'
+        product:
+          $ref: '#/components/schemas/ProductEntity'
+        current_period_start_date:
+          type: string
+          format: date-time
+        current_period_end_date:
+          type: string
+          format: date-time
+        canceled_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    SubscriptionListEntity:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionEntity'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    UpdateSubscriptionRequest:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+        update_behavior:
+          type: string
+    UpgradeSubscriptionRequest:
+      type: object
+      required:
+        - product_id
+      properties:
+        product_id:
+          type: string
+        update_behavior:
+          type: string
+          enum:
+            - proration-charge-immediately
+            - proration-charge
+            - proration-none
+    TransactionEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+        object:
+          type: string
+          example: transaction
+        amount:
+          type: integer
+        amount_paid:
+          type: integer
+        currency:
+          type: string
+        type:
+          type: string
+        status:
+          type: string
+        customer:
+          type: string
+        order:
+          type: string
+        subscription:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+    TransactionListEntity:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionEntity'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    CreateDiscountRequest:
+      type: object
+      required:
+        - name
+        - type
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - percentage
+            - fixed
+        amount:
+          type: integer
+          description: Fixed amount in cents when type is fixed.
+        percentage:
+          type: integer
+          description: Percentage value when type is percentage.
+        currency:
+          type: string
+        duration:
+          type: string
+          enum:
+            - forever
+            - once
+            - repeating
+        code:
+          type: string
+        max_redemptions:
+          type: integer
+        expiry_date:
+          type: string
+          format: date-time
+    DiscountEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+        object:
+          type: string
+          example: discount
+        status:
+          type: string
+        name:
+          type: string
+        code:
+          type: string
+        type:
+          type: string
+          enum:
+            - percentage
+            - fixed
+        amount:
+          type: integer
+        percentage:
+          type: integer
+        duration:
+          type: string
+        expiry_date:
+          type: string
+          format: date-time
+    ValidateLicenseRequest:
+      type: object
+      required:
+        - key
+      properties:
+        key:
+          type: string
+        instance_id:
+          type: string
+    ActivateLicenseRequest:
+      type: object
+      required:
+        - key
+        - instance_name
+      properties:
+        key:
+          type: string
+        instance_name:
+          type: string
+    DeactivateLicenseRequest:
+      type: object
+      required:
+        - key
+        - instance_id
+      properties:
+        key:
+          type: string
+        instance_id:
+          type: string
+    LicenseInstanceEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+        object:
+          type: string
+          example: license-instance
+        name:
+          type: string
+        status:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+    LicenseEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+        object:
+          type: string
+          example: license
+        product_id:
+          type: string
+        status:
+          type: string
+          enum:
+            - active
+            - inactive
+            - expired
+            - disabled
+        key:
+          type: string
+        activation:
+          type: integer
+          description: Number of instances this license key has been activated on.
+        activation_limit:
+          type: integer
+          nullable: true
+          description: Activation limit. Null if activations are unlimited.
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        instance:
+          $ref: '#/components/schemas/LicenseInstanceEntity'
+    Pagination:
+      type: object
+      properties:
+        total_records:
+          type: integer
+        total_pages:
+          type: integer
+        current_page:
+          type: integer
+        next_page:
+          type: integer
+          nullable: true
+        prev_page:
+          type: integer
+          nullable: true
+    Error:
+      type: object
+      properties:
+        trace_id:
+          type: string
+        status:
+          type: integer
+        error:
+          type: string
+        message:
+          type: array
+          items:
+            type: string
+        timestamp:
+          type: string
+          format: date-time
