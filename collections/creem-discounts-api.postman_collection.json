@@ -1,0 +1,344 @@
+{
+  "item": [
+    {
+      "id": "19cdad9b-353c-4625-a2c2-fc1a6dd59fd8",
+      "name": "Discounts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a7af0020-d218-4642-aec8-b9d57bba84e7",
+          "name": "Create a discount",
+          "request": {
+            "name": "Create a discount",
+            "description": {
+              "content": "Create a promotional discount code.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "discounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"percentage\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"duration\": \"<string>\",\n  \"code\": \"<string>\",\n  \"max_redemptions\": \"<integer>\",\n  \"expiry_date\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d24da8dc-38ff-4a55-adfb-1114c28404e1",
+              "name": "Discount created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "discounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"percentage\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"duration\": \"<string>\",\n  \"code\": \"<string>\",\n  \"max_redemptions\": \"<integer>\",\n  \"expiry_date\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"mode\": \"string\",\n  \"object\": \"discount\",\n  \"status\": \"string\",\n  \"name\": \"string\",\n  \"code\": \"string\",\n  \"type\": \"fixed\",\n  \"amount\": 7114,\n  \"percentage\": 8058,\n  \"duration\": \"string\",\n  \"expiry_date\": \"1964-09-12T11:15:32.697Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9faa375a-3039-4a52-9018-89bdaac14549",
+          "name": "Retrieve a discount",
+          "request": {
+            "name": "Retrieve a discount",
+            "description": {
+              "content": "Retrieve a discount by id or code.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "discounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "discount_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "code",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "79a00585-14cc-49fc-9b81-5a309ab82e55",
+              "name": "Discount",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "discounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "discount_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "code",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"mode\": \"string\",\n  \"object\": \"discount\",\n  \"status\": \"string\",\n  \"name\": \"string\",\n  \"code\": \"string\",\n  \"type\": \"fixed\",\n  \"amount\": 7114,\n  \"percentage\": 8058,\n  \"duration\": \"string\",\n  \"expiry_date\": \"1964-09-12T11:15:32.697Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c31ba1ca-d5af-41a9-88fc-14bbbcdd4cf1",
+          "name": "Delete a discount",
+          "request": {
+            "name": "Delete a discount",
+            "description": {
+              "content": "Permanently delete a discount code.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "discounts",
+                ":id",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8502ef6d-84a8-48ed-8cac-9fa394326e32",
+              "name": "Discount deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "discounts",
+                    ":id",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"mode\": \"string\",\n  \"object\": \"discount\",\n  \"status\": \"string\",\n  \"name\": \"string\",\n  \"code\": \"string\",\n  \"type\": \"fixed\",\n  \"amount\": 7114,\n  \"percentage\": 8058,\n  \"duration\": \"string\",\n  \"expiry_date\": \"1964-09-12T11:15:32.697Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.creem.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d34fcd01-1685-4912-98e1-47b321586703",
+    "name": "Creem Checkouts Discounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Creem, a merchant-of-record payments platform for SaaS and AI startups. Manage products, hosted checkouts, customers, subscriptions, transactions, discounts, and software license keys while Creem handles global sales tax, VAT, fraud, and compliance as the merchant of record.\n\nContact Support:\n Name: Creem Support\n Email: support@creem.io",
+      "type": "text/plain"
+    }
+  }
+}

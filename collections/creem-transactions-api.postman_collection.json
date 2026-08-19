@@ -1,0 +1,257 @@
+{
+  "item": [
+    {
+      "id": "586ca9a4-0e37-4ff8-b5de-371c1ca62984",
+      "name": "Transactions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "57b52dcb-4c56-4471-bdc4-cfa2009245b0",
+          "name": "Retrieve a transaction",
+          "request": {
+            "name": "Retrieve a transaction",
+            "description": {
+              "content": "Retrieve a single transaction by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "transaction_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d7d7fe30-ba4d-4614-ba98-e38d9a4f5124",
+              "name": "Transaction",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "transaction_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"mode\": \"string\",\n  \"object\": \"transaction\",\n  \"amount\": 6091,\n  \"amount_paid\": 3959,\n  \"currency\": \"string\",\n  \"type\": \"string\",\n  \"status\": \"string\",\n  \"customer\": \"string\",\n  \"order\": \"string\",\n  \"subscription\": \"string\",\n  \"created_at\": \"1985-06-25T18:37:15.518Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2df61618-8d6a-4034-9488-997c42ea1694",
+          "name": "List all transactions",
+          "request": {
+            "name": "List all transactions",
+            "description": {
+              "content": "Search and retrieve a paginated list of transactions, filtered by customer, product, and date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "customer_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_number",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "19312327-5d49-4b66-b96a-b1980a9bcf00",
+              "name": "Paginated list of transactions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customer_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"mode\": \"string\",\n      \"object\": \"transaction\",\n      \"amount\": 5041,\n      \"amount_paid\": 6920,\n      \"currency\": \"string\",\n      \"type\": \"string\",\n      \"status\": \"string\",\n      \"customer\": \"string\",\n      \"order\": \"string\",\n      \"subscription\": \"string\",\n      \"created_at\": \"1949-11-19T20:41:47.506Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"mode\": \"string\",\n      \"object\": \"transaction\",\n      \"amount\": 810,\n      \"amount_paid\": 6225,\n      \"currency\": \"string\",\n      \"type\": \"string\",\n      \"status\": \"string\",\n      \"customer\": \"string\",\n      \"order\": \"string\",\n      \"subscription\": \"string\",\n      \"created_at\": \"1987-09-04T05:01:39.989Z\"\n    }\n  ],\n  \"pagination\": {\n    \"total_records\": 5972,\n    \"total_pages\": 6346,\n    \"current_page\": 9533,\n    \"next_page\": 3786,\n    \"prev_page\": 3835\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.creem.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "41847301-1e92-4af8-b44f-455270f15971",
+    "name": "Creem Checkouts Transactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Creem, a merchant-of-record payments platform for SaaS and AI startups. Manage products, hosted checkouts, customers, subscriptions, transactions, discounts, and software license keys while Creem handles global sales tax, VAT, fraud, and compliance as the merchant of record.\n\nContact Support:\n Name: Creem Support\n Email: support@creem.io",
+      "type": "text/plain"
+    }
+  }
+}

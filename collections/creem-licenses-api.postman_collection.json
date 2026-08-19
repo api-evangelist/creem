@@ -1,0 +1,352 @@
+{
+  "item": [
+    {
+      "id": "9f4244c6-64de-49b4-b187-b31909f5c34d",
+      "name": "Licenses",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "44c0c2d2-8606-41f3-8976-5a4d3a644be6",
+          "name": "Validate a license key",
+          "request": {
+            "name": "Validate a license key",
+            "description": {
+              "content": "Validate a license key or a specific license instance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "licenses",
+                "validate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"<string>\",\n  \"instance_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7143722c-04a9-4965-995f-5067a1f5e3f8",
+              "name": "License",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "licenses",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key\": \"<string>\",\n  \"instance_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"mode\": \"string\",\n  \"object\": \"license\",\n  \"product_id\": \"string\",\n  \"status\": \"expired\",\n  \"key\": \"string\",\n  \"activation\": 7815,\n  \"activation_limit\": 5909,\n  \"expires_at\": \"1972-04-08T19:19:08.873Z\",\n  \"created_at\": \"1991-08-16T07:06:32.446Z\",\n  \"instance\": {\n    \"id\": \"string\",\n    \"mode\": \"string\",\n    \"object\": \"license-instance\",\n    \"name\": \"string\",\n    \"status\": \"string\",\n    \"created_at\": \"1978-07-06T12:19:47.442Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3e531466-a0e5-4724-8cf8-3065a09a0b31",
+          "name": "Activate a license key",
+          "request": {
+            "name": "Activate a license key",
+            "description": {
+              "content": "Activate a license key for a new instance/device.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "licenses",
+                "activate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"<string>\",\n  \"instance_name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1f4bc2b2-5853-4df0-afe8-f1a36fff5d8c",
+              "name": "License",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "licenses",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key\": \"<string>\",\n  \"instance_name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"mode\": \"string\",\n  \"object\": \"license\",\n  \"product_id\": \"string\",\n  \"status\": \"expired\",\n  \"key\": \"string\",\n  \"activation\": 7815,\n  \"activation_limit\": 5909,\n  \"expires_at\": \"1972-04-08T19:19:08.873Z\",\n  \"created_at\": \"1991-08-16T07:06:32.446Z\",\n  \"instance\": {\n    \"id\": \"string\",\n    \"mode\": \"string\",\n    \"object\": \"license-instance\",\n    \"name\": \"string\",\n    \"status\": \"string\",\n    \"created_at\": \"1978-07-06T12:19:47.442Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd329ef5-ac64-4948-9862-378c4423c854",
+          "name": "Deactivate a license key instance",
+          "request": {
+            "name": "Deactivate a license key instance",
+            "description": {
+              "content": "Deactivate a license key instance/device.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "licenses",
+                "deactivate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"<string>\",\n  \"instance_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "682da5fb-ecb8-4d82-b458-cdeaea26953b",
+              "name": "License",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "licenses",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key\": \"<string>\",\n  \"instance_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"mode\": \"string\",\n  \"object\": \"license\",\n  \"product_id\": \"string\",\n  \"status\": \"expired\",\n  \"key\": \"string\",\n  \"activation\": 7815,\n  \"activation_limit\": 5909,\n  \"expires_at\": \"1972-04-08T19:19:08.873Z\",\n  \"created_at\": \"1991-08-16T07:06:32.446Z\",\n  \"instance\": {\n    \"id\": \"string\",\n    \"mode\": \"string\",\n    \"object\": \"license-instance\",\n    \"name\": \"string\",\n    \"status\": \"string\",\n    \"created_at\": \"1978-07-06T12:19:47.442Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.creem.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "552786f9-8820-4146-a819-1e6a3308d5b0",
+    "name": "Creem Checkouts Licenses API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Creem, a merchant-of-record payments platform for SaaS and AI startups. Manage products, hosted checkouts, customers, subscriptions, transactions, discounts, and software license keys while Creem handles global sales tax, VAT, fraud, and compliance as the merchant of record.\n\nContact Support:\n Name: Creem Support\n Email: support@creem.io",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,338 @@
+{
+  "item": [
+    {
+      "id": "d261758b-5882-4d58-b46c-039c69169570",
+      "name": "Products",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fbee431d-0084-460d-8355-b9167d85101e",
+          "name": "Create a product",
+          "request": {
+            "name": "Create a product",
+            "description": {
+              "content": "Create a new product for one-time or recurring billing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"price\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"description\": \"<string>\",\n  \"billing_type\": \"<string>\",\n  \"billing_period\": \"<string>\",\n  \"tax_mode\": \"<string>\",\n  \"tax_category\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7660d424-8894-450b-8ef6-0e3fec22b8d8",
+              "name": "Product created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"price\": \"<integer>\",\n  \"currency\": \"USD\",\n  \"description\": \"<string>\",\n  \"billing_type\": \"<string>\",\n  \"billing_period\": \"<string>\",\n  \"tax_mode\": \"<string>\",\n  \"tax_category\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"mode\": \"test\",\n  \"object\": \"product\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"price\": 3667,\n  \"currency\": \"string\",\n  \"billing_type\": \"recurring\",\n  \"billing_period\": \"string\",\n  \"status\": \"string\",\n  \"tax_mode\": \"string\",\n  \"tax_category\": \"string\",\n  \"image_url\": \"string\",\n  \"product_url\": \"string\",\n  \"created_at\": \"2021-10-18T09:14:23.284Z\",\n  \"updated_at\": \"1998-02-20T10:43:54.772Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0dfb2d71-8dfd-4c3b-9df8-f63525ac6de3",
+          "name": "Retrieve a product",
+          "request": {
+            "name": "Retrieve a product",
+            "description": {
+              "content": "Retrieve a single product by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "product_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c4d633c9-64f2-45bb-8d1d-0a07ce4cadfc",
+              "name": "Product",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "product_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"mode\": \"test\",\n  \"object\": \"product\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"price\": 3667,\n  \"currency\": \"string\",\n  \"billing_type\": \"recurring\",\n  \"billing_period\": \"string\",\n  \"status\": \"string\",\n  \"tax_mode\": \"string\",\n  \"tax_category\": \"string\",\n  \"image_url\": \"string\",\n  \"product_url\": \"string\",\n  \"created_at\": \"2021-10-18T09:14:23.284Z\",\n  \"updated_at\": \"1998-02-20T10:43:54.772Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "70342dd6-c005-47b5-9397-edd3fc0e1eec",
+          "name": "List all products",
+          "request": {
+            "name": "List all products",
+            "description": {
+              "content": "Search and retrieve a paginated list of products.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_number",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "09597e09-78ca-4f4b-a3f3-6469f088f0c7",
+              "name": "Paginated list of products",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"mode\": \"live\",\n      \"object\": \"product\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"price\": 6864,\n      \"currency\": \"string\",\n      \"billing_type\": \"onetime\",\n      \"billing_period\": \"string\",\n      \"status\": \"string\",\n      \"tax_mode\": \"string\",\n      \"tax_category\": \"string\",\n      \"image_url\": \"string\",\n      \"product_url\": \"string\",\n      \"created_at\": \"1982-09-19T13:00:11.358Z\",\n      \"updated_at\": \"2011-12-27T13:44:52.744Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"mode\": \"test\",\n      \"object\": \"product\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"price\": 6967,\n      \"currency\": \"string\",\n      \"billing_type\": \"onetime\",\n      \"billing_period\": \"string\",\n      \"status\": \"string\",\n      \"tax_mode\": \"string\",\n      \"tax_category\": \"string\",\n      \"image_url\": \"string\",\n      \"product_url\": \"string\",\n      \"created_at\": \"1963-03-26T12:21:06.734Z\",\n      \"updated_at\": \"1991-02-07T21:08:31.994Z\"\n    }\n  ],\n  \"pagination\": {\n    \"total_records\": 6344,\n    \"total_pages\": 8500,\n    \"current_page\": 6933,\n    \"next_page\": 8905,\n    \"prev_page\": 1680\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.creem.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ed4eba84-35bc-4331-9e9b-21d631a5c55b",
+    "name": "Creem Checkouts Products API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Creem, a merchant-of-record payments platform for SaaS and AI startups. Manage products, hosted checkouts, customers, subscriptions, transactions, discounts, and software license keys while Creem handles global sales tax, VAT, fraud, and compliance as the merchant of record.\n\nContact Support:\n Name: Creem Support\n Email: support@creem.io",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Creem Checkouts Discounts API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Discounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a discount",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.creem.io/v1/discounts",
+            "params": [
+              {
+                "name": "discount_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve a discount by id or code."
+        },
+        {
+          "info": {
+            "name": "Create a discount",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.creem.io/v1/discounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a promotional discount code."
+        },
+        {
+          "info": {
+            "name": "Delete a discount",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.creem.io/v1/discounts/:id/delete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Permanently delete a discount code."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Creem Checkouts Licenses API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Licenses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validate a license key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.creem.io/v1/licenses/validate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validate a license key or a specific license instance."
+        },
+        {
+          "info": {
+            "name": "Activate a license key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.creem.io/v1/licenses/activate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Activate a license key for a new instance/device."
+        },
+        {
+          "info": {
+            "name": "Deactivate a license key instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.creem.io/v1/licenses/deactivate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deactivate a license key instance/device."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
