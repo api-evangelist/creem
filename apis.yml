@@ -24,6 +24,12 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/creem.png
 tags:
 - Payments
 - Merchant of Record
+- Subscription
+- Software-as-a-Service
+- Billing
+tags_raw:
+- Payments
+- Merchant of Record
 - Subscriptions
 - SaaS
 - Billing
@@ -205,6 +211,8 @@ apis:
   humanURL: https://docs.creem.io/api-reference/endpoint/create-product
   baseURL: https://api.creem.io/v1
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
@@ -247,6 +255,8 @@ apis:
   humanURL: https://docs.creem.io/api-reference/endpoint/create-product
   baseURL: https://api.creem.io/v1
   tags:
+  - Subscription
+  tags_raw:
   - Subscriptions
   properties:
   - type: OpenAPI
@@ -289,6 +299,8 @@ apis:
   humanURL: https://docs.creem.io/api-reference/endpoint/create-product
   baseURL: https://api.creem.io/v1
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
