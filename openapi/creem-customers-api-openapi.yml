@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Creem Checkouts Customers API
+  title: Creem Customers API
   description: REST API for Creem, a merchant-of-record payments platform for SaaS and AI startups. Manage products, hosted checkouts, customers, subscriptions, transactions, discounts, and software license keys while Creem handles global sales tax, VAT, fraud, and compliance as the merchant of record.
   termsOfService: https://www.creem.io/terms
   contact:
@@ -70,6 +70,13 @@ components:
       properties:
         customer_portal_link:
           type: string
+    CreateBillingPortalRequest:
+      type: object
+      required:
+      - customer_id
+      properties:
+        customer_id:
+          type: string
     CustomerEntity:
       type: object
       properties:
@@ -92,13 +99,6 @@ components:
         updated_at:
           type: string
           format: date-time
-    CreateBillingPortalRequest:
-      type: object
-      required:
-      - customer_id
-      properties:
-        customer_id:
-          type: string
   securitySchemes:
     apiKey:
       type: apiKey

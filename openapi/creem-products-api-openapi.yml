@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Creem Checkouts Products API
+  title: Creem Products API
   description: REST API for Creem, a merchant-of-record payments platform for SaaS and AI startups. Manage products, hosted checkouts, customers, subscriptions, transactions, discounts, and software license keys while Creem handles global sales tax, VAT, fraud, and compliance as the merchant of record.
   termsOfService: https://www.creem.io/terms
   contact:
@@ -86,21 +86,6 @@ paths:
                 $ref: '#/components/schemas/ProductListEntity'
 components:
   schemas:
-    Pagination:
-      type: object
-      properties:
-        total_records:
-          type: integer
-        total_pages:
-          type: integer
-        current_page:
-          type: integer
-        next_page:
-          type: integer
-          nullable: true
-        prev_page:
-          type: integer
-          nullable: true
     ProductListEntity:
       type: object
       properties:
@@ -110,38 +95,6 @@ components:
             $ref: '#/components/schemas/ProductEntity'
         pagination:
           $ref: '#/components/schemas/Pagination'
-    CreateProductRequest:
-      type: object
-      required:
-      - name
-      - price
-      - currency
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        price:
-          type: integer
-          description: Price in the smallest currency unit (cents).
-        currency:
-          type: string
-          example: USD
-        billing_type:
-          type: string
-          enum:
-          - onetime
-          - recurring
-        billing_period:
-          type: string
-          description: Billing period for recurring products, e.g. every-month, every-year.
-        tax_mode:
-          type: string
-          enum:
-          - inclusive
-          - exclusive
-        tax_category:
-          type: string
     ProductEntity:
       type: object
       properties:
@@ -186,6 +139,55 @@ components:
         updated_at:
           type: string
           format: date-time
+    Pagination:
+      type: object
+      properties:
+        total_records:
+          type: integer
+        total_pages:
+          type: integer
+        current_page:
+          type: integer
+        next_page:
+          type:
+          - integer
+          - 'null'
+        prev_page:
+          type:
+          - integer
+          - 'null'
+    CreateProductRequest:
+      type: object
+      required:
+      - name
+      - price
+      - currency
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: integer
+          description: Price in the smallest currency unit (cents).
+        currency:
+          type: string
+          example: USD
+        billing_type:
+          type: string
+          enum:
+          - onetime
+          - recurring
+        billing_period:
+          type: string
+          description: Billing period for recurring products, e.g. every-month, every-year.
+        tax_mode:
+          type: string
+          enum:
+          - inclusive
+          - exclusive
+        tax_category:
+          type: string
   securitySchemes:
     apiKey:
       type: apiKey

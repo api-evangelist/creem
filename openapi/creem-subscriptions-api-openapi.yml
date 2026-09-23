@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Creem Checkouts Subscriptions API
+  title: Creem Subscriptions API
   description: REST API for Creem, a merchant-of-record payments platform for SaaS and AI startups. Manage products, hosted checkouts, customers, subscriptions, transactions, discounts, and software license keys while Creem handles global sales tax, VAT, fraud, and compliance as the merchant of record.
   termsOfService: https://www.creem.io/terms
   contact:
@@ -179,6 +179,23 @@ paths:
                 $ref: '#/components/schemas/SubscriptionEntity'
 components:
   schemas:
+    Pagination:
+      type: object
+      properties:
+        total_records:
+          type: integer
+        total_pages:
+          type: integer
+        current_page:
+          type: integer
+        next_page:
+          type:
+          - integer
+          - 'null'
+        prev_page:
+          type:
+          - integer
+          - 'null'
     CustomerEntity:
       type: object
       properties:
@@ -195,53 +212,6 @@ components:
           type: string
         country:
           type: string
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-    SubscriptionListEntity:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubscriptionEntity'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-    SubscriptionEntity:
-      type: object
-      properties:
-        id:
-          type: string
-        mode:
-          type: string
-        object:
-          type: string
-          example: subscription
-        status:
-          type: string
-          enum:
-          - active
-          - trialing
-          - paused
-          - past_due
-          - expired
-          - canceled
-        customer:
-          $ref: '#/components/schemas/CustomerEntity'
-        product:
-          $ref: '#/components/schemas/ProductEntity'
-        current_period_start_date:
-          type: string
-          format: date-time
-        current_period_end_date:
-          type: string
-          format: date-time
-        canceled_at:
-          type: string
-          format: date-time
         created_at:
           type: string
           format: date-time
@@ -292,6 +262,53 @@ components:
         updated_at:
           type: string
           format: date-time
+    SubscriptionEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+        object:
+          type: string
+          example: subscription
+        status:
+          type: string
+          enum:
+          - active
+          - trialing
+          - paused
+          - past_due
+          - expired
+          - canceled
+        customer:
+          $ref: '#/components/schemas/CustomerEntity'
+        product:
+          $ref: '#/components/schemas/ProductEntity'
+        current_period_start_date:
+          type: string
+          format: date-time
+        current_period_end_date:
+          type: string
+          format: date-time
+        canceled_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    SubscriptionListEntity:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionEntity'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
     UpgradeSubscriptionRequest:
       type: object
       required:
@@ -305,21 +322,6 @@ components:
           - proration-charge-immediately
           - proration-charge
           - proration-none
-    Pagination:
-      type: object
-      properties:
-        total_records:
-          type: integer
-        total_pages:
-          type: integer
-        current_page:
-          type: integer
-        next_page:
-          type: integer
-          nullable: true
-        prev_page:
-          type: integer
-          nullable: true
     UpdateSubscriptionRequest:
       type: object
       properties:

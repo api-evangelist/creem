@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Creem Checkouts API
   description: REST API for Creem, a merchant-of-record payments platform for SaaS and AI startups. Manage products, hosted checkouts, customers, subscriptions, transactions, discounts, and software license keys while Creem handles global sales tax, VAT, fraud, and compliance as the merchant of record.
@@ -59,6 +59,28 @@ paths:
                 $ref: '#/components/schemas/CheckoutEntity'
 components:
   schemas:
+    CustomerEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+        object:
+          type: string
+          example: customer
+        email:
+          type: string
+        name:
+          type: string
+        country:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
     LicenseInstanceEntity:
       type: object
       properties:
@@ -76,21 +98,43 @@ components:
         created_at:
           type: string
           format: date-time
-    CustomerEntity:
+    ProductEntity:
       type: object
       properties:
         id:
           type: string
         mode:
           type: string
+          enum:
+          - test
+          - live
         object:
           type: string
-          example: customer
-        email:
-          type: string
+          example: product
         name:
           type: string
-        country:
+        description:
+          type: string
+        price:
+          type: integer
+        currency:
+          type: string
+        billing_type:
+          type: string
+          enum:
+          - onetime
+          - recurring
+        billing_period:
+          type: string
+        status:
+          type: string
+        tax_mode:
+          type: string
+        tax_category:
+          type: string
+        image_url:
+          type: string
+        product_url:
           type: string
         created_at:
           type: string
@@ -123,13 +167,15 @@ components:
           type: integer
           description: Number of instances this license key has been activated on.
         activation_limit:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
           description: Activation limit. Null if activations are unlimited.
         expires_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         created_at:
           type: string
           format: date-time
@@ -220,50 +266,6 @@ components:
         metadata:
           type: object
           additionalProperties: true
-    ProductEntity:
-      type: object
-      properties:
-        id:
-          type: string
-        mode:
-          type: string
-          enum:
-          - test
-          - live
-        object:
-          type: string
-          example: product
-        name:
-          type: string
-        description:
-          type: string
-        price:
-          type: integer
-        currency:
-          type: string
-        billing_type:
-          type: string
-          enum:
-          - onetime
-          - recurring
-        billing_period:
-          type: string
-        status:
-          type: string
-        tax_mode:
-          type: string
-        tax_category:
-          type: string
-        image_url:
-          type: string
-        product_url:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
     CreateCheckoutRequest:
       type: object
       required:

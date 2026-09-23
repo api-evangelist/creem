@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Creem Checkouts Licenses API
+  title: Creem Licenses API
   description: REST API for Creem, a merchant-of-record payments platform for SaaS and AI startups. Manage products, hosted checkouts, customers, subscriptions, transactions, discounts, and software license keys while Creem handles global sales tax, VAT, fraud, and compliance as the merchant of record.
   termsOfService: https://www.creem.io/terms
   contact:
@@ -80,6 +80,16 @@ paths:
                 $ref: '#/components/schemas/LicenseEntity'
 components:
   schemas:
+    DeactivateLicenseRequest:
+      type: object
+      required:
+      - key
+      - instance_id
+      properties:
+        key:
+          type: string
+        instance_id:
+          type: string
     LicenseInstanceEntity:
       type: object
       properties:
@@ -97,6 +107,15 @@ components:
         created_at:
           type: string
           format: date-time
+    ValidateLicenseRequest:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          type: string
+        instance_id:
+          type: string
     LicenseEntity:
       type: object
       properties:
@@ -122,13 +141,15 @@ components:
           type: integer
           description: Number of instances this license key has been activated on.
         activation_limit:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
           description: Activation limit. Null if activations are unlimited.
         expires_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         created_at:
           type: string
           format: date-time
@@ -143,25 +164,6 @@ components:
         key:
           type: string
         instance_name:
-          type: string
-    ValidateLicenseRequest:
-      type: object
-      required:
-      - key
-      properties:
-        key:
-          type: string
-        instance_id:
-          type: string
-    DeactivateLicenseRequest:
-      type: object
-      required:
-      - key
-      - instance_id
-      properties:
-        key:
-          type: string
-        instance_id:
           type: string
   securitySchemes:
     apiKey:

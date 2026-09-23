@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Creem Checkouts Transactions API
+  title: Creem Transactions API
   description: REST API for Creem, a merchant-of-record payments platform for SaaS and AI startups. Manage products, hosted checkouts, customers, subscriptions, transactions, discounts, and software license keys while Creem handles global sales tax, VAT, fraud, and compliance as the merchant of record.
   termsOfService: https://www.creem.io/terms
   contact:
@@ -87,11 +87,13 @@ components:
         current_page:
           type: integer
         next_page:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         prev_page:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
     TransactionListEntity:
       type: object
       properties:
