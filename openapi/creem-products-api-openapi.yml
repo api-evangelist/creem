@@ -86,15 +86,6 @@ paths:
                 $ref: '#/components/schemas/ProductListEntity'
 components:
   schemas:
-    ProductListEntity:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProductEntity'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
     ProductEntity:
       type: object
       properties:
@@ -139,6 +130,15 @@ components:
         updated_at:
           type: string
           format: date-time
+    ProductListEntity:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductEntity'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
     Pagination:
       type: object
       properties:

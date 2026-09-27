@@ -179,6 +179,28 @@ paths:
                 $ref: '#/components/schemas/SubscriptionEntity'
 components:
   schemas:
+    CustomerEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+        object:
+          type: string
+          example: customer
+        email:
+          type: string
+        name:
+          type: string
+        country:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
     Pagination:
       type: object
       properties:
@@ -196,7 +218,7 @@ components:
           type:
           - integer
           - 'null'
-    CustomerEntity:
+    SubscriptionEntity:
       type: object
       properties:
         id:
@@ -205,13 +227,29 @@ components:
           type: string
         object:
           type: string
-          example: customer
-        email:
+          example: subscription
+        status:
           type: string
-        name:
+          enum:
+          - active
+          - trialing
+          - paused
+          - past_due
+          - expired
+          - canceled
+        customer:
+          $ref: '#/components/schemas/CustomerEntity'
+        product:
+          $ref: '#/components/schemas/ProductEntity'
+        current_period_start_date:
           type: string
-        country:
+          format: date-time
+        current_period_end_date:
           type: string
+          format: date-time
+        canceled_at:
+          type: string
+          format: date-time
         created_at:
           type: string
           format: date-time
@@ -262,44 +300,15 @@ components:
         updated_at:
           type: string
           format: date-time
-    SubscriptionEntity:
+    UpdateSubscriptionRequest:
       type: object
       properties:
-        id:
+        items:
+          type: array
+          items:
+            type: object
+        update_behavior:
           type: string
-        mode:
-          type: string
-        object:
-          type: string
-          example: subscription
-        status:
-          type: string
-          enum:
-          - active
-          - trialing
-          - paused
-          - past_due
-          - expired
-          - canceled
-        customer:
-          $ref: '#/components/schemas/CustomerEntity'
-        product:
-          $ref: '#/components/schemas/ProductEntity'
-        current_period_start_date:
-          type: string
-          format: date-time
-        current_period_end_date:
-          type: string
-          format: date-time
-        canceled_at:
-          type: string
-          format: date-time
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
     SubscriptionListEntity:
       type: object
       properties:
@@ -322,15 +331,6 @@ components:
           - proration-charge-immediately
           - proration-charge
           - proration-none
-    UpdateSubscriptionRequest:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-        update_behavior:
-          type: string
   securitySchemes:
     apiKey:
       type: apiKey

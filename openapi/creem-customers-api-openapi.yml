@@ -65,17 +65,17 @@ paths:
                 $ref: '#/components/schemas/BillingPortalEntity'
 components:
   schemas:
-    BillingPortalEntity:
-      type: object
-      properties:
-        customer_portal_link:
-          type: string
     CreateBillingPortalRequest:
       type: object
       required:
       - customer_id
       properties:
         customer_id:
+          type: string
+    BillingPortalEntity:
+      type: object
+      properties:
+        customer_portal_link:
           type: string
     CustomerEntity:
       type: object
