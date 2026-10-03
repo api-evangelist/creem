@@ -72,11 +72,6 @@ components:
       properties:
         customer_id:
           type: string
-    BillingPortalEntity:
-      type: object
-      properties:
-        customer_portal_link:
-          type: string
     CustomerEntity:
       type: object
       properties:
@@ -99,6 +94,11 @@ components:
         updated_at:
           type: string
           format: date-time
+    BillingPortalEntity:
+      type: object
+      properties:
+        customer_portal_link:
+          type: string
   securitySchemes:
     apiKey:
       type: apiKey

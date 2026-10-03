@@ -77,32 +77,6 @@ paths:
                 $ref: '#/components/schemas/TransactionListEntity'
 components:
   schemas:
-    TransactionListEntity:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TransactionEntity'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-    Pagination:
-      type: object
-      properties:
-        total_records:
-          type: integer
-        total_pages:
-          type: integer
-        current_page:
-          type: integer
-        next_page:
-          type:
-          - integer
-          - 'null'
-        prev_page:
-          type:
-          - integer
-          - 'null'
     TransactionEntity:
       type: object
       properties:
@@ -132,6 +106,32 @@ components:
         created_at:
           type: string
           format: date-time
+    Pagination:
+      type: object
+      properties:
+        total_records:
+          type: integer
+        total_pages:
+          type: integer
+        current_page:
+          type: integer
+        next_page:
+          type:
+          - integer
+          - 'null'
+        prev_page:
+          type:
+          - integer
+          - 'null'
+    TransactionListEntity:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionEntity'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
   securitySchemes:
     apiKey:
       type: apiKey

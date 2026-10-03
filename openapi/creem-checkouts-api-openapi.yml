@@ -59,6 +59,74 @@ paths:
                 $ref: '#/components/schemas/CheckoutEntity'
 components:
   schemas:
+    SubscriptionEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+        object:
+          type: string
+          example: subscription
+        status:
+          type: string
+          enum:
+          - active
+          - trialing
+          - paused
+          - past_due
+          - expired
+          - canceled
+        customer:
+          $ref: '#/components/schemas/CustomerEntity'
+        product:
+          $ref: '#/components/schemas/ProductEntity'
+        current_period_start_date:
+          type: string
+          format: date-time
+        current_period_end_date:
+          type: string
+          format: date-time
+        canceled_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    CreateCheckoutRequest:
+      type: object
+      required:
+      - product_id
+      properties:
+        request_id:
+          type: string
+        product_id:
+          type: string
+        units:
+          type: integer
+        discount_code:
+          type: string
+        customer:
+          type: object
+          properties:
+            id:
+              type: string
+            email:
+              type: string
+        custom_fields:
+          type: array
+          description: Up to 3 custom fields collected at checkout.
+          items:
+            type: object
+        success_url:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: true
     CheckoutEntity:
       type: object
       required:
@@ -106,28 +174,6 @@ components:
         metadata:
           type: object
           additionalProperties: true
-    CustomerEntity:
-      type: object
-      properties:
-        id:
-          type: string
-        mode:
-          type: string
-        object:
-          type: string
-          example: customer
-        email:
-          type: string
-        name:
-          type: string
-        country:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
     LicenseInstanceEntity:
       type: object
       properties:
@@ -145,7 +191,7 @@ components:
         created_at:
           type: string
           format: date-time
-    SubscriptionEntity:
+    LicenseEntity:
       type: object
       properties:
         id:
@@ -154,35 +200,36 @@ components:
           type: string
         object:
           type: string
-          example: subscription
+          example: license
+        product_id:
+          type: string
         status:
           type: string
           enum:
           - active
-          - trialing
-          - paused
-          - past_due
+          - inactive
           - expired
-          - canceled
-        customer:
-          $ref: '#/components/schemas/CustomerEntity'
-        product:
-          $ref: '#/components/schemas/ProductEntity'
-        current_period_start_date:
+          - disabled
+        key:
           type: string
-          format: date-time
-        current_period_end_date:
-          type: string
-          format: date-time
-        canceled_at:
-          type: string
+        activation:
+          type: integer
+          description: Number of instances this license key has been activated on.
+        activation_limit:
+          type:
+          - integer
+          - 'null'
+          description: Activation limit. Null if activations are unlimited.
+        expires_at:
+          type:
+          - string
+          - 'null'
           format: date-time
         created_at:
           type: string
           format: date-time
-        updated_at:
-          type: string
-          format: date-time
+        instance:
+          $ref: '#/components/schemas/LicenseInstanceEntity'
     ProductEntity:
       type: object
       properties:
@@ -227,37 +274,7 @@ components:
         updated_at:
           type: string
           format: date-time
-    CreateCheckoutRequest:
-      type: object
-      required:
-      - product_id
-      properties:
-        request_id:
-          type: string
-        product_id:
-          type: string
-        units:
-          type: integer
-        discount_code:
-          type: string
-        customer:
-          type: object
-          properties:
-            id:
-              type: string
-            email:
-              type: string
-        custom_fields:
-          type: array
-          description: Up to 3 custom fields collected at checkout.
-          items:
-            type: object
-        success_url:
-          type: string
-        metadata:
-          type: object
-          additionalProperties: true
-    LicenseEntity:
+    CustomerEntity:
       type: object
       properties:
         id:
@@ -266,36 +283,19 @@ components:
           type: string
         object:
           type: string
-          example: license
-        product_id:
+          example: customer
+        email:
           type: string
-        status:
+        name:
           type: string
-          enum:
-          - active
-          - inactive
-          - expired
-          - disabled
-        key:
+        country:
           type: string
-        activation:
-          type: integer
-          description: Number of instances this license key has been activated on.
-        activation_limit:
-          type:
-          - integer
-          - 'null'
-          description: Activation limit. Null if activations are unlimited.
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
         created_at:
           type: string
           format: date-time
-        instance:
-          $ref: '#/components/schemas/LicenseInstanceEntity'
+        updated_at:
+          type: string
+          format: date-time
   securitySchemes:
     apiKey:
       type: apiKey

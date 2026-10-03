@@ -179,45 +179,6 @@ paths:
                 $ref: '#/components/schemas/SubscriptionEntity'
 components:
   schemas:
-    CustomerEntity:
-      type: object
-      properties:
-        id:
-          type: string
-        mode:
-          type: string
-        object:
-          type: string
-          example: customer
-        email:
-          type: string
-        name:
-          type: string
-        country:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-    Pagination:
-      type: object
-      properties:
-        total_records:
-          type: integer
-        total_pages:
-          type: integer
-        current_page:
-          type: integer
-        next_page:
-          type:
-          - integer
-          - 'null'
-        prev_page:
-          type:
-          - integer
-          - 'null'
     SubscriptionEntity:
       type: object
       properties:
@@ -309,15 +270,23 @@ components:
             type: object
         update_behavior:
           type: string
-    SubscriptionListEntity:
+    Pagination:
       type: object
       properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubscriptionEntity'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
+        total_records:
+          type: integer
+        total_pages:
+          type: integer
+        current_page:
+          type: integer
+        next_page:
+          type:
+          - integer
+          - 'null'
+        prev_page:
+          type:
+          - integer
+          - 'null'
     UpgradeSubscriptionRequest:
       type: object
       required:
@@ -331,6 +300,37 @@ components:
           - proration-charge-immediately
           - proration-charge
           - proration-none
+    SubscriptionListEntity:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionEntity'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    CustomerEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+        object:
+          type: string
+          example: customer
+        email:
+          type: string
+        name:
+          type: string
+        country:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
   securitySchemes:
     apiKey:
       type: apiKey
