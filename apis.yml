@@ -357,6 +357,9 @@ apis:
   - type: APIReference
     url: https://docs.creem.io/learn/webhooks/event-types
 common:
+- type: CapabilityMap
+  url: capabilities/creem-capability-edges.yml
+  name: Creem Business Capability Map
 - type: AgenticAccess
   url: agentic-access/creem-agentic-access.yml
 - type: VulnerabilityDisclosure

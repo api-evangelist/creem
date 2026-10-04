@@ -1,0 +1,62 @@
+slug: creem
+provider: Creem
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 5
+edges:
+- tag: Subscriptions
+  spec_file: creem-subscriptions-api-openapi.yml
+  capability_id: BC-4240.40
+  capability_id_l1: BC-4240
+  capability_name: Subscription Modification
+  confidence: 0.85
+  evidence: POST /subscriptions/{id}/upgrade upgradeSubscription; POST /subscriptions/{id}/cancel cancelSubscription;
+    pauseSubscription; resumeSubscription
+  reason: Full in-life subscription lifecycle operations; upgrade/pause/resume/update dominate, which
+    is subscription modification, with cancellation also present.
+- tag: Licenses
+  spec_file: creem-licenses-api-openapi.yml
+  capability_id: BC-4240.70
+  capability_id_l1: BC-4240
+  capability_name: Entitlement Enforcement
+  confidence: 0.8
+  evidence: POST /licenses/validate validateLicense Validate a license key; POST /licenses/activate activateLicense
+  reason: Runtime validation and activation of software license keys is entitlement resolution and enforcement
+    for the customer's product access.
+- tag: Checkouts
+  spec_file: creem-checkouts-api-openapi.yml
+  capability_id: BC-4250.40
+  capability_id_l1: BC-4250
+  capability_name: Payment Collection & Dunning
+  confidence: 0.75
+  evidence: POST /checkouts createCheckout Create a checkout session; merchant-of-record payments platform
+  reason: Hosted checkout sessions collect payment for SaaS products — payment collection within subscription
+    billing. Could also be read as subscription contracting, hence moderate confidence.
+- tag: Discounts
+  spec_file: creem-discounts-api-openapi.yml
+  capability_id: BC-4250.20
+  capability_id_l1: BC-4250
+  capability_name: Rating & Charging
+  confidence: 0.7
+  evidence: POST /discounts createDiscount Create a discount; DiscountEntity
+  reason: Discount objects applied to subscription/checkout charges — rating and charging in the SaaS
+    billing model. Alternative reading is BC-440.30 discount management; chose the software frame's billing
+    sub-capability.
+- tag: Products
+  spec_file: creem-products-api-openapi.yml
+  capability_id: BC-4240.10
+  capability_id_l1: BC-4240
+  capability_name: Plan & Entitlement Design
+  confidence: 0.7
+  evidence: POST /products createProduct Create a product; ProductEntity
+  reason: Products on a SaaS merchant-of-record platform define the sellable plans/priced offerings that
+    subscriptions and checkouts reference — plan definition. Thin evidence on pricing/entitlement specifics.
