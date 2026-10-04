@@ -106,6 +106,15 @@ components:
         created_at:
           type: string
           format: date-time
+    TransactionListEntity:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionEntity'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
     Pagination:
       type: object
       properties:
@@ -123,15 +132,6 @@ components:
           type:
           - integer
           - 'null'
-    TransactionListEntity:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TransactionEntity'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
   securitySchemes:
     apiKey:
       type: apiKey

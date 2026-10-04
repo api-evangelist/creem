@@ -179,44 +179,36 @@ paths:
                 $ref: '#/components/schemas/SubscriptionEntity'
 components:
   schemas:
-    SubscriptionEntity:
+    UpgradeSubscriptionRequest:
       type: object
+      required:
+      - product_id
       properties:
-        id:
+        product_id:
           type: string
-        mode:
-          type: string
-        object:
-          type: string
-          example: subscription
-        status:
+        update_behavior:
           type: string
           enum:
-          - active
-          - trialing
-          - paused
-          - past_due
-          - expired
-          - canceled
-        customer:
-          $ref: '#/components/schemas/CustomerEntity'
-        product:
-          $ref: '#/components/schemas/ProductEntity'
-        current_period_start_date:
-          type: string
-          format: date-time
-        current_period_end_date:
-          type: string
-          format: date-time
-        canceled_at:
-          type: string
-          format: date-time
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
+          - proration-charge-immediately
+          - proration-charge
+          - proration-none
+    Pagination:
+      type: object
+      properties:
+        total_records:
+          type: integer
+        total_pages:
+          type: integer
+        current_page:
+          type: integer
+        next_page:
+          type:
+          - integer
+          - 'null'
+        prev_page:
+          type:
+          - integer
+          - 'null'
     ProductEntity:
       type: object
       properties:
@@ -261,45 +253,6 @@ components:
         updated_at:
           type: string
           format: date-time
-    UpdateSubscriptionRequest:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-        update_behavior:
-          type: string
-    Pagination:
-      type: object
-      properties:
-        total_records:
-          type: integer
-        total_pages:
-          type: integer
-        current_page:
-          type: integer
-        next_page:
-          type:
-          - integer
-          - 'null'
-        prev_page:
-          type:
-          - integer
-          - 'null'
-    UpgradeSubscriptionRequest:
-      type: object
-      required:
-      - product_id
-      properties:
-        product_id:
-          type: string
-        update_behavior:
-          type: string
-          enum:
-          - proration-charge-immediately
-          - proration-charge
-          - proration-none
     SubscriptionListEntity:
       type: object
       properties:
@@ -309,6 +262,44 @@ components:
             $ref: '#/components/schemas/SubscriptionEntity'
         pagination:
           $ref: '#/components/schemas/Pagination'
+    SubscriptionEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+        object:
+          type: string
+          example: subscription
+        status:
+          type: string
+          enum:
+          - active
+          - trialing
+          - paused
+          - past_due
+          - expired
+          - canceled
+        customer:
+          $ref: '#/components/schemas/CustomerEntity'
+        product:
+          $ref: '#/components/schemas/ProductEntity'
+        current_period_start_date:
+          type: string
+          format: date-time
+        current_period_end_date:
+          type: string
+          format: date-time
+        canceled_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
     CustomerEntity:
       type: object
       properties:
@@ -331,6 +322,15 @@ components:
         updated_at:
           type: string
           format: date-time
+    UpdateSubscriptionRequest:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+        update_behavior:
+          type: string
   securitySchemes:
     apiKey:
       type: apiKey

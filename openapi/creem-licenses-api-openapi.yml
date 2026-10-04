@@ -80,16 +80,6 @@ paths:
                 $ref: '#/components/schemas/LicenseEntity'
 components:
   schemas:
-    DeactivateLicenseRequest:
-      type: object
-      required:
-      - key
-      - instance_id
-      properties:
-        key:
-          type: string
-        instance_id:
-          type: string
     ValidateLicenseRequest:
       type: object
       required:
@@ -98,16 +88,6 @@ components:
         key:
           type: string
         instance_id:
-          type: string
-    ActivateLicenseRequest:
-      type: object
-      required:
-      - key
-      - instance_name
-      properties:
-        key:
-          type: string
-        instance_name:
           type: string
     LicenseInstanceEntity:
       type: object
@@ -165,6 +145,26 @@ components:
           format: date-time
         instance:
           $ref: '#/components/schemas/LicenseInstanceEntity'
+    ActivateLicenseRequest:
+      type: object
+      required:
+      - key
+      - instance_name
+      properties:
+        key:
+          type: string
+        instance_name:
+          type: string
+    DeactivateLicenseRequest:
+      type: object
+      required:
+      - key
+      - instance_id
+      properties:
+        key:
+          type: string
+        instance_id:
+          type: string
   securitySchemes:
     apiKey:
       type: apiKey

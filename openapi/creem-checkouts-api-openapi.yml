@@ -59,74 +59,6 @@ paths:
                 $ref: '#/components/schemas/CheckoutEntity'
 components:
   schemas:
-    SubscriptionEntity:
-      type: object
-      properties:
-        id:
-          type: string
-        mode:
-          type: string
-        object:
-          type: string
-          example: subscription
-        status:
-          type: string
-          enum:
-          - active
-          - trialing
-          - paused
-          - past_due
-          - expired
-          - canceled
-        customer:
-          $ref: '#/components/schemas/CustomerEntity'
-        product:
-          $ref: '#/components/schemas/ProductEntity'
-        current_period_start_date:
-          type: string
-          format: date-time
-        current_period_end_date:
-          type: string
-          format: date-time
-        canceled_at:
-          type: string
-          format: date-time
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-    CreateCheckoutRequest:
-      type: object
-      required:
-      - product_id
-      properties:
-        request_id:
-          type: string
-        product_id:
-          type: string
-        units:
-          type: integer
-        discount_code:
-          type: string
-        customer:
-          type: object
-          properties:
-            id:
-              type: string
-            email:
-              type: string
-        custom_fields:
-          type: array
-          description: Up to 3 custom fields collected at checkout.
-          items:
-            type: object
-        success_url:
-          type: string
-        metadata:
-          type: object
-          additionalProperties: true
     CheckoutEntity:
       type: object
       required:
@@ -174,6 +106,50 @@ components:
         metadata:
           type: object
           additionalProperties: true
+    ProductEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+          enum:
+          - test
+          - live
+        object:
+          type: string
+          example: product
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: integer
+        currency:
+          type: string
+        billing_type:
+          type: string
+          enum:
+          - onetime
+          - recurring
+        billing_period:
+          type: string
+        status:
+          type: string
+        tax_mode:
+          type: string
+        tax_category:
+          type: string
+        image_url:
+          type: string
+        product_url:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
     LicenseInstanceEntity:
       type: object
       properties:
@@ -230,44 +206,68 @@ components:
           format: date-time
         instance:
           $ref: '#/components/schemas/LicenseInstanceEntity'
-    ProductEntity:
+    CreateCheckoutRequest:
+      type: object
+      required:
+      - product_id
+      properties:
+        request_id:
+          type: string
+        product_id:
+          type: string
+        units:
+          type: integer
+        discount_code:
+          type: string
+        customer:
+          type: object
+          properties:
+            id:
+              type: string
+            email:
+              type: string
+        custom_fields:
+          type: array
+          description: Up to 3 custom fields collected at checkout.
+          items:
+            type: object
+        success_url:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: true
+    SubscriptionEntity:
       type: object
       properties:
         id:
           type: string
         mode:
           type: string
-          enum:
-          - test
-          - live
         object:
           type: string
-          example: product
-        name:
-          type: string
-        description:
-          type: string
-        price:
-          type: integer
-        currency:
-          type: string
-        billing_type:
-          type: string
-          enum:
-          - onetime
-          - recurring
-        billing_period:
-          type: string
+          example: subscription
         status:
           type: string
-        tax_mode:
+          enum:
+          - active
+          - trialing
+          - paused
+          - past_due
+          - expired
+          - canceled
+        customer:
+          $ref: '#/components/schemas/CustomerEntity'
+        product:
+          $ref: '#/components/schemas/ProductEntity'
+        current_period_start_date:
           type: string
-        tax_category:
+          format: date-time
+        current_period_end_date:
           type: string
-        image_url:
+          format: date-time
+        canceled_at:
           type: string
-        product_url:
-          type: string
+          format: date-time
         created_at:
           type: string
           format: date-time
