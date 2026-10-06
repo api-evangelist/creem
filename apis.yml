@@ -51,7 +51,7 @@ tags_raw:
 - SaaS
 - Billing
 created: '2026-06-21'
-modified: '2026-06-21'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: creem:creem-checkouts-api
@@ -357,6 +357,8 @@ apis:
   - type: APIReference
     url: https://docs.creem.io/learn/webhooks/event-types
 common:
+- url: https://www.creem.io/blog
+  type: Blog
 - type: CapabilityMap
   url: capabilities/creem-capability-edges.yml
   name: Creem Business Capability Map
