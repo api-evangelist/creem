@@ -192,23 +192,6 @@ components:
           - proration-charge-immediately
           - proration-charge
           - proration-none
-    Pagination:
-      type: object
-      properties:
-        total_records:
-          type: integer
-        total_pages:
-          type: integer
-        current_page:
-          type: integer
-        next_page:
-          type:
-          - integer
-          - 'null'
-        prev_page:
-          type:
-          - integer
-          - 'null'
     ProductEntity:
       type: object
       properties:
@@ -253,15 +236,6 @@ components:
         updated_at:
           type: string
           format: date-time
-    SubscriptionListEntity:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubscriptionEntity'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
     SubscriptionEntity:
       type: object
       properties:
@@ -300,6 +274,41 @@ components:
         updated_at:
           type: string
           format: date-time
+    UpdateSubscriptionRequest:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+        update_behavior:
+          type: string
+    SubscriptionListEntity:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionEntity'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    Pagination:
+      type: object
+      properties:
+        total_records:
+          type: integer
+        total_pages:
+          type: integer
+        current_page:
+          type: integer
+        next_page:
+          type:
+          - integer
+          - 'null'
+        prev_page:
+          type:
+          - integer
+          - 'null'
     CustomerEntity:
       type: object
       properties:
@@ -322,15 +331,6 @@ components:
         updated_at:
           type: string
           format: date-time
-    UpdateSubscriptionRequest:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-        update_behavior:
-          type: string
   securitySchemes:
     apiKey:
       type: apiKey

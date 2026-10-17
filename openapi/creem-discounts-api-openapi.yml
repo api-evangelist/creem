@@ -84,36 +84,6 @@ paths:
                 $ref: '#/components/schemas/DiscountEntity'
 components:
   schemas:
-    DiscountEntity:
-      type: object
-      properties:
-        id:
-          type: string
-        mode:
-          type: string
-        object:
-          type: string
-          example: discount
-        status:
-          type: string
-        name:
-          type: string
-        code:
-          type: string
-        type:
-          type: string
-          enum:
-          - percentage
-          - fixed
-        amount:
-          type: integer
-        percentage:
-          type: integer
-        duration:
-          type: string
-        expiry_date:
-          type: string
-          format: date-time
     CreateDiscountRequest:
       type: object
       required:
@@ -145,6 +115,36 @@ components:
           type: string
         max_redemptions:
           type: integer
+        expiry_date:
+          type: string
+          format: date-time
+    DiscountEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        mode:
+          type: string
+        object:
+          type: string
+          example: discount
+        status:
+          type: string
+        name:
+          type: string
+        code:
+          type: string
+        type:
+          type: string
+          enum:
+          - percentage
+          - fixed
+        amount:
+          type: integer
+        percentage:
+          type: integer
+        duration:
+          type: string
         expiry_date:
           type: string
           format: date-time

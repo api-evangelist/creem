@@ -86,6 +86,38 @@ paths:
                 $ref: '#/components/schemas/ProductListEntity'
 components:
   schemas:
+    CreateProductRequest:
+      type: object
+      required:
+      - name
+      - price
+      - currency
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: integer
+          description: Price in the smallest currency unit (cents).
+        currency:
+          type: string
+          example: USD
+        billing_type:
+          type: string
+          enum:
+          - onetime
+          - recurring
+        billing_period:
+          type: string
+          description: Billing period for recurring products, e.g. every-month, every-year.
+        tax_mode:
+          type: string
+          enum:
+          - inclusive
+          - exclusive
+        tax_category:
+          type: string
     ProductListEntity:
       type: object
       properties:
@@ -156,38 +188,6 @@ components:
         updated_at:
           type: string
           format: date-time
-    CreateProductRequest:
-      type: object
-      required:
-      - name
-      - price
-      - currency
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        price:
-          type: integer
-          description: Price in the smallest currency unit (cents).
-        currency:
-          type: string
-          example: USD
-        billing_type:
-          type: string
-          enum:
-          - onetime
-          - recurring
-        billing_period:
-          type: string
-          description: Billing period for recurring products, e.g. every-month, every-year.
-        tax_mode:
-          type: string
-          enum:
-          - inclusive
-          - exclusive
-        tax_category:
-          type: string
   securitySchemes:
     apiKey:
       type: apiKey

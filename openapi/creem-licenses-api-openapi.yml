@@ -80,6 +80,26 @@ paths:
                 $ref: '#/components/schemas/LicenseEntity'
 components:
   schemas:
+    DeactivateLicenseRequest:
+      type: object
+      required:
+      - key
+      - instance_id
+      properties:
+        key:
+          type: string
+        instance_id:
+          type: string
+    ActivateLicenseRequest:
+      type: object
+      required:
+      - key
+      - instance_name
+      properties:
+        key:
+          type: string
+        instance_name:
+          type: string
     ValidateLicenseRequest:
       type: object
       required:
@@ -89,23 +109,6 @@ components:
           type: string
         instance_id:
           type: string
-    LicenseInstanceEntity:
-      type: object
-      properties:
-        id:
-          type: string
-        mode:
-          type: string
-        object:
-          type: string
-          example: license-instance
-        name:
-          type: string
-        status:
-          type: string
-        created_at:
-          type: string
-          format: date-time
     LicenseEntity:
       type: object
       properties:
@@ -145,26 +148,23 @@ components:
           format: date-time
         instance:
           $ref: '#/components/schemas/LicenseInstanceEntity'
-    ActivateLicenseRequest:
+    LicenseInstanceEntity:
       type: object
-      required:
-      - key
-      - instance_name
       properties:
-        key:
+        id:
           type: string
-        instance_name:
+        mode:
           type: string
-    DeactivateLicenseRequest:
-      type: object
-      required:
-      - key
-      - instance_id
-      properties:
-        key:
+        object:
           type: string
-        instance_id:
+          example: license-instance
+        name:
           type: string
+        status:
+          type: string
+        created_at:
+          type: string
+          format: date-time
   securitySchemes:
     apiKey:
       type: apiKey
