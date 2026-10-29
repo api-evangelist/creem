@@ -1,4 +1,4 @@
-# Creem (creem)
+# Creem
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,201 +66,129 @@
 
 Creem is a merchant-of-record payments platform built for SaaS and AI startups. Its REST API handles products, hosted checkouts, customers, subscriptions, transactions, discounts, and software license keys, while Creem acts as the merchant of record to manage global sales tax, VAT, fraud, and compliance on the seller's behalf.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/creem/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/creem/refs/heads/main/apis.yml)
+**Areas:** Payments · Merchant of Record · Subscription · Software-as-a-Service · Billing
 
-## Tags
+## Creem on APIs.io
 
-- Payments
-- Merchant of Record
-- Subscriptions
-- SaaS
-- Billing
+Everything profiled for Creem is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/creem/](https://apis.io/providers/creem/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (7)
 
-- **Created:** 2026-06-21
-- **Modified:** 2026-06-21
+- [Creem Checkouts API](https://apis.io/apis/creem/creem-checkouts-api/) — The Checkouts API from Creem — 1 operation(s) for checkouts.
+- [Creem Customers API](https://apis.io/apis/creem/creem-customers-api/) — The Customers API from Creem — 2 operation(s) for customers.
+- [Creem Discounts API](https://apis.io/apis/creem/creem-discounts-api/) — The Discounts API from Creem — 2 operation(s) for discounts.
+- [Creem Licenses API](https://apis.io/apis/creem/creem-licenses-api/) — The Licenses API from Creem — 3 operation(s) for licenses.
+- [Creem Products API](https://apis.io/apis/creem/creem-products-api/) — The Products API from Creem — 2 operation(s) for products.
+- [Creem Subscriptions API](https://apis.io/apis/creem/creem-subscriptions-api/) — The Subscriptions API from Creem — 7 operation(s) for subscriptions.
+- [Creem Transactions API](https://apis.io/apis/creem/creem-transactions-api/) — The Transactions API from Creem — 2 operation(s) for transactions.
 
-## APIs
+### Published properties
 
-### Creem Products API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Create, retrieve, and search products for one-time or recurring billing, including price, currency, billing type and period, tax mode, and license-key configuration.
+#### Agentic access (1)
 
-- **Human URL:** [https://docs.creem.io/api-reference/endpoint/create-product](https://docs.creem.io/api-reference/endpoint/create-product)
-- **Base URL:** `https://api.creem.io/v1`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Creem Agentic Access](https://apis.io/agentic-access/creem/creem-agentic-access/)
 
-- Products
-- Catalog
-- Billing
+#### Collections (8)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://docs.creem.io/api-reference/endpoint/create-product)
-- [API Reference](https://docs.creem.io/api-reference/endpoint/search-products)
-- [OpenAPI](openapi/creem-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/creem.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/creem.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Creem API](https://apis.io/collections/creem/open-creem/)
+- [Creem Checkouts API](https://apis.io/collections/creem/open-creem-checkouts-api/)
+- [Creem Checkouts Customers API](https://apis.io/collections/creem/open-creem-customers-api/)
+- [Creem Checkouts Discounts API](https://apis.io/collections/creem/open-creem-discounts-api/)
+- [Creem Checkouts Licenses API](https://apis.io/collections/creem/open-creem-licenses-api/)
+- [Creem Checkouts Products API](https://apis.io/collections/creem/open-creem-products-api/)
+- [Creem Checkouts Subscriptions API](https://apis.io/collections/creem/open-creem-subscriptions-api/)
+- [Creem Checkouts Transactions API](https://apis.io/collections/creem/open-creem-transactions-api/)
 
-### Creem Checkouts API
+#### Security (3)
 
-Create hosted checkout sessions that return a Creem-hosted checkout URL, attach products, discounts, customers, custom fields, and metadata, and retrieve a session's status and resulting order.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://docs.creem.io/api-reference/endpoint/create-checkout](https://docs.creem.io/api-reference/endpoint/create-checkout)
-- **Base URL:** `https://api.creem.io/v1`
+- [Creem Authentication](https://apis.io/security/creem/creem-authentication/)
+- [Creem Domain Security](https://apis.io/security/creem/creem-domain-security/)
+- [Creem Vulnerability Disclosure](https://apis.io/security/creem/creem-vulnerability-disclosure/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Checkout
-- Payments
-- Hosted
+Published plans, tiers and prices.
 
-#### Properties
+- [Creem Plans Pricing](https://apis.io/plans/creem/creem-plans-pricing/)
 
-- [Documentation](https://docs.creem.io/features/checkout/checkout-api)
-- [API Reference](https://docs.creem.io/api-reference/endpoint/create-checkout)
-- [OpenAPI](openapi/creem-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/creem.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/creem.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-### Creem Customers API
+Published request limits.
 
-Retrieve customers by id or email and generate self-service customer billing portal links so customers can manage their own subscriptions, invoices, and payment methods.
+- [Creem Rate Limits](https://apis.io/rate-limits/creem/creem-rate-limits/)
 
-- **Human URL:** [https://docs.creem.io/api-reference/endpoint/get-customer](https://docs.creem.io/api-reference/endpoint/get-customer)
-- **Base URL:** `https://api.creem.io/v1`
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Customers
-- Billing Portal
+- [Creem Finops](https://apis.io/finops/creem/creem-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://docs.creem.io/api-reference/endpoint/get-customer)
-- [API Reference](https://docs.creem.io/api-reference/endpoint/get-billing-link)
-- [OpenAPI](openapi/creem-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/creem.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/creem.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### Creem Subscriptions API
-
-Retrieve and search subscriptions and manage their lifecycle - cancel, update, upgrade to a different product, pause, and resume - across active, trialing, paused, past_due, expired, and canceled states.
-
-- **Human URL:** [https://docs.creem.io/api-reference/endpoint/get-subscription](https://docs.creem.io/api-reference/endpoint/get-subscription)
-- **Base URL:** `https://api.creem.io/v1`
-
-#### Tags
-
-- Subscriptions
-- Recurring
-- Lifecycle
-
-#### Properties
-
-- [Documentation](https://docs.creem.io/api-reference/endpoint/get-subscription)
-- [API Reference](https://docs.creem.io/api-reference/endpoint/upgrade-subscription)
-- [OpenAPI](openapi/creem-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/creem.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/creem.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Creem Transactions API
-
-Retrieve a single transaction by id and search transactions filtered by customer, product, and date range for payment reconciliation and reporting.
-
-- **Human URL:** [https://docs.creem.io/api-reference/endpoint/get-transaction](https://docs.creem.io/api-reference/endpoint/get-transaction)
-- **Base URL:** `https://api.creem.io/v1`
-
-#### Tags
-
-- Transactions
-- Payments
-- Reporting
-
-#### Properties
-
-- [Documentation](https://docs.creem.io/api-reference/endpoint/get-transaction)
-- [API Reference](https://docs.creem.io/api-reference/endpoint/search-transactions)
-- [OpenAPI](openapi/creem-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/creem.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/creem.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Creem Discounts API
-
-Create, retrieve, search, and delete promotional discount codes (percentage or fixed amount) that can be applied to checkout sessions and subscriptions.
-
-- **Human URL:** [https://docs.creem.io/api-reference/endpoint/create-discount](https://docs.creem.io/api-reference/endpoint/create-discount)
-- **Base URL:** `https://api.creem.io/v1`
-
-#### Tags
-
-- Discounts
-- Coupons
-- Promotions
-
-#### Properties
-
-- [Documentation](https://docs.creem.io/api-reference/endpoint/create-discount)
-- [API Reference](https://docs.creem.io/api-reference/endpoint/delete-discount)
-- [OpenAPI](openapi/creem-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/creem.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/creem.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Creem Licenses API
-
-Validate, activate, and deactivate software license keys and their per-device instances, with activation limits and expiry, for distributing and enforcing licensed software.
-
-- **Human URL:** [https://docs.creem.io/api-reference/endpoint/validate-license](https://docs.creem.io/api-reference/endpoint/validate-license)
-- **Base URL:** `https://api.creem.io/v1`
-
-#### Tags
-
-- Licenses
-- License Keys
-- Activation
-
-#### Properties
-
-- [Documentation](https://docs.creem.io/features/license-keys)
-- [API Reference](https://docs.creem.io/api-reference/endpoint/validate-license)
-- [OpenAPI](openapi/creem-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/creem.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/creem.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Creem Webhooks API
-
-HMAC-SHA256 signed event notifications for checkout, subscription, refund, and dispute events, delivered to seller-configured endpoints for keeping application state in sync with Creem.
-
-- **Human URL:** [https://docs.creem.io/learn/webhooks/introduction](https://docs.creem.io/learn/webhooks/introduction)
-- **Base URL:** `https://api.creem.io/v1`
-
-#### Tags
-
-- Webhooks
-- Events
-- HMAC
-
-#### Properties
-
-- [Documentation](https://docs.creem.io/learn/webhooks/introduction)
-- [API Reference](https://docs.creem.io/learn/webhooks/event-types)
-- [OpenAPI](openapi/creem-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/creem.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/creem.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/armitage-labs)
-- [LinkedIn](https://www.linkedin.com/company/creem-io)
 - [Website](https://www.creem.io/)
 - [Documentation](https://docs.creem.io)
-- [Plans](plans/creem-plans-pricing.yml)
-- [Rate Limits](rate-limits/creem-rate-limits.yml)
-- [Fin Ops](finops/creem-finops.yml)
+- [Blog](https://www.creem.io/blog)
+- [GitHub](https://github.com/armitage-labs)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 25.8** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 48.5 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 31.0 |
+| Access clarity | 5.3 |
+
+**Agent readiness 19.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.1** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/creem/](https://apis.io/providers/creem/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Creem: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/creem/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
